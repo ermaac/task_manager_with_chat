@@ -1,20 +1,29 @@
 require 'rails_helper'
+require 'support/factory_girl'
 
 RSpec.describe Board, type: :model do
-  context 'Board' do
-
-    it 'Board exists' do
-      board = Board.new
-      expect(board).to be_truthy
+  context 'title' do
+    it 'should validate presence' do
+      board = build(:board)
+      board.title = ''
+      board.valid?
+      board.errors[:title].should include("can't be blank")
     end
+    it 'should not validate presence' do
+      board = build(:board)
+      board.valid?
+      board.errors[:title].should_not include("can't be blank")
+    end
+  end
 
-    it 'Board can include some lists' do
-      board = Board.new
-      list = List.new
-      list2 = List.new
-      board.lists << list
+  context 'assotiation' do
+    it 'should include some lists' do
+      board = build(:board)
+      list1 = build(:list)
+      list2 = build(:list)
+      board.lists << list1
       board.lists << list2
-      expect(board.lists).to include(list,list2)
+      expect(board.lists).to include(list1,list2)
     end
   end
 end
