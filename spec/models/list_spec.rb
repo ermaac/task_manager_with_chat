@@ -2,28 +2,28 @@ require 'rails_helper'
 require 'support/factory_girl'
 
 RSpec.describe List, type: :model do
-  context 'title' do
-    it 'should validate presence' do
-      list = build(:list)
-      list.title = ''
-      list.valid?
-      list.errors[:title].should include("can't be blank")
+  let(:valid_list)   { build(:list) }
+  let(:invalid_list) { build(:list, title: '') }
+
+  describe 'presence validation' do
+    it 'does not passes validation' do
+      invalid_list.valid?
+      expect(invalid_list.errors[:title]).to include("can't be blank")
     end
-    it 'should not validate presence' do
-      list = build(:list)
-      list.valid?
-      list.errors[:title].should_not include("can't be blank")
+    it 'passes validation' do
+      valid_list.valid?
+      expect(valid_list.errors[:title]).to_not include("can't be blank")
     end
   end
 
-  context 'assotiation' do
-    it 'should include some notes' do
-      list = build(:list)
-      note1 = build(:note)
-      note2 = build(:note)
-      list.notes << note1
-      list.notes << note2
-      expect(list.notes).to include(note1,note2)
+  describe 'assotiation' do
+    let(:note1) { build(:note) }
+    let(:note2) { build(:note) }
+    let(:list) { build(:list, notes: notes) }
+    let(:notes) { [note1, note2] }
+
+    it 'includes some lists' do
+      expect(list.notes).to include(note1, note2)
     end
   end
 end

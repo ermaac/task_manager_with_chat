@@ -1,5 +1,5 @@
 FactoryGirl.define do
   factory :note do
-    title "Main note"
+    title 'Main note'
   end
 end

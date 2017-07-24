@@ -1,5 +1,5 @@
 FactoryGirl.define do
   factory :board do
-    title "Black board"
+    title 'Black board'
   end
 end

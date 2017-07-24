@@ -1,5 +1,5 @@
 FactoryGirl.define do
   factory :list do
-    title "White list"
+    title 'White list'
   end
 end
