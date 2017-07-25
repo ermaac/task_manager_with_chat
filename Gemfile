@@ -34,6 +34,7 @@ group :test do
   gem 'guard-minitest',           '2.4.4'
   gem 'minitest-reporters',       '1.1.14'
   gem 'rails-controller-testing', '1.0.2'
+  gem 'shoulda-matchers', git: 'https://github.com/thoughtbot/shoulda-matchers.git', branch: 'rails-5'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
