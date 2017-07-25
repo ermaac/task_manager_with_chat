@@ -4,7 +4,7 @@ RSpec.describe Profile, type: :model do
   context 'profile testing' do
     describe 'validations' do
       before(:each) do
-        @user = User.create
+        @user = User.create email: 'test@example.com', password: '123123123', password_confirmation: '123123123'
         @profile = Profile.new
       end
 
