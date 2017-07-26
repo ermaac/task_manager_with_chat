@@ -24,6 +24,7 @@
         <% end %>
 
         <%= f.submit "Log in", class:"btn btn-primary btn-lg" %>
+        <%= link_to image_tag("facebook.svg",size: "64x40"), user_facebook_omniauth_authorize_path() %>
       <% end %>
       <%= link_to "Sign in with Google", user_google_oauth2_omniauth_authorize_path %><br />
       <%= render "devise/shared/links" %>

@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   def home
-    render html: "Hello world"
+    render html: 'Hello world'
   end
 end
