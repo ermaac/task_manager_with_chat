@@ -18,6 +18,8 @@ gem 'turbolinks', '~> 5'
 gem 'uglifier', '>= 1.3.0'
 gem 'webpacker', '~> 2.0'
 gem 'omniauth-google-oauth2', '~>0.5.1'
+gem "factory_girl_rails", "~> 4.0"
+gem 'shoulda-matchers', git: 'https://github.com/thoughtbot/shoulda-matchers.git', branch: 'rails-5'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
