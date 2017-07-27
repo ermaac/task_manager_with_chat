@@ -2,7 +2,6 @@
 
 class User < ApplicationRecord
   has_many :invitings, foreign_key: "invitor_id"
-  # has_many :invitings, foreign_key: "user_to_invite_id"
 
   PROVIDERS_UID_COLUMN_NAME = {:facebook=>'facebook_id', :google_oauth2=>'google_id', :vkontakte=>'vk_id', :github=>'gh_id'}
   # Include default devise modules. Others available are:

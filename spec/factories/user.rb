@@ -1,5 +1,8 @@
 FactoryGirl.define do
   factory :user do
+    #password
+    #password_confirmation
+
     # email
     # encrypted_password
     # vk_id
