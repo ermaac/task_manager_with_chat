@@ -263,6 +263,11 @@ Devise.setup do |config|
                   Rails.application.secrets.facebook_app_secret,
                   callback_url: 'http://localhost:5000/users/auth/facebook/callback'
 
+  config.omniauth :github,
+                  Rails.application.secrets.github_app_id,
+                  Rails.application.secrets.github_app_secret,
+                  callback_url: 'http://localhost:5000/users/auth/github/callback'
+
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.
