@@ -1,4 +1,7 @@
 class Board < ApplicationRecord
   has_many :lists, dependent: :destroy
-  validates :title, presence: true
+  has_many :invitings, dependent: :destroy
+  has_many :chats, dependent: :destroy
+  belongs_to :profile
+  validates :title, :description, presence: true
 end
