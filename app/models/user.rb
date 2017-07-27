@@ -1,11 +1,8 @@
-# frozen_string_literal: true
-
 class User < ApplicationRecord
-  has_many :invitings, foreign_key: "invitor_id"
+  has_many :users_to_invite, class_name: 'Inviting', foreign_key: "invitor_id"
+  has_many :invitors, class_name: 'Inviting', foreign_key: "user_to_invite_id"
 
   PROVIDERS_UID_COLUMN_NAME = {:facebook=>'facebook_id', :google_oauth2=>'google_id', :vkontakte=>'vk_id', :github=>'gh_id'}
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, omniauth_providers: [:facebook, :google_oauth2]
@@ -18,17 +15,6 @@ class User < ApplicationRecord
     end
   end
 
-  # def self.from_omniauth(access_token)
-  #   data = access_token.info
-  #   user = User.where(email: data['email']).first
-  #
-  #   # Uncomment the section below if you want users to be created if they don't exist
-  #   unless user
-  #     user = User.create(email: data['email'], password: Devise.friendly_token[0,20])
-  #   end
-  #   user
-  # end
-# =======
   def self.get_uid provider
     PROVIDERS_UID_COLUMN_NAME[provider]
   end
