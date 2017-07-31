@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  root to: 'users#index'
+  root 'static_pages#home'
+  get 'static_pages/about'
+  get 'static_pages/help'
+  get 'static_pages/contact'
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 end

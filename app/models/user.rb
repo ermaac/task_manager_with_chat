@@ -10,7 +10,7 @@ class User < ApplicationRecord
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
-         :omniauthable, omniauth_providers: %i[facebook google_oauth2 github]
+         :omniauthable, omniauth_providers: %i[facebook google_oauth2 github vkontakte]
 
   def self.new_with_session(params, session)
     super.tap do |user|
