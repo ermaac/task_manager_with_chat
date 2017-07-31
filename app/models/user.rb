@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class User < ApplicationRecord
   PROVIDERS_UID_COLUMN_NAME = {
     facebook: 'facebook_id',
@@ -7,6 +5,9 @@ class User < ApplicationRecord
     vkontakte: 'vk_id',
     github: 'gh_id'
   }.freeze
+
+  has_many :users_to_invite, class_name: 'Inviting', foreign_key: "invitor_id"
+  has_many :invitors, class_name: 'Inviting', foreign_key: "user_to_invite_id"
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
