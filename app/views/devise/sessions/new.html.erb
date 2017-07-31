@@ -1,35 +1,66 @@
 <div class="authform">
   <div class="panel panel-default">
     <div class="panel-heading">
-      <h2>Log in</h2>
+      <h2>Sign in</h2>
     </div>
     <div class="panel-body">
       <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
         <div class="form-group">
-          <%= f.label :email %><br />
-          <%= f.email_field :email, autofocus: true, class:"form-control" %>
+          <% if flash[:notice] %>
+            <p class="alert alert-warning"><%= notice %></p>
+          <% end %>
+          <% if flash[:alert] %>
+            <p class="alert alert-danger"><%= alert %></p>
+          <% end %>
         </div>
-
-        <div class="form-group">
-          <%= f.label :password %><br />
-          <%= f.password_field :password, autocomplete: "off", class:"form-control" %>
+        <div class="input-group form-group">
+          <span class="input-group-addon">@</span>
+          <%= f.email_field :email, {
+            class: "form-control", placeholder: "Email", autofocus: true
+          }%>
         </div>
-
+        <div class="input-group form-group">
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-lock" aria-hidden="true"></span>
+          </span>
+          <%= f.password_field :password, {
+            class: "form-control", placeholder: "Password", autocomplete: "off"
+          }%>
+        </div>
         <% if devise_mapping.rememberable? %>
-          <div class="checkbox">
-            <label>
-              <%= f.check_box :remember_me %>Remember
-            </label>
+          <div class="form-group">
+            <div class="checkbox">
+              <label>
+                <%= f.check_box :remember_me %>Remember
+              </label>
+            </div>
           </div>
         <% end %>
-
-        <%= f.submit "Log in", class:"btn btn-primary btn-lg" %>
-        <%= link_to image_tag("facebook.svg", size: "64x40"), user_facebook_omniauth_authorize_path() %>
-        <%= link_to image_tag('google-plus.svg', size: '64x40'), user_google_oauth2_omniauth_authorize_path %>
-      <% end %>
-      <%= link_to "Sign in with Google", user_google_oauth2_omniauth_authorize_path %><br />
-      <%= render "devise/shared/links" %>
+        <div class="form-group">
+          <%= f.submit "Sign in", class:"btn btn-primary" %>
+          <div class="text-right" style="float: right;">
+            <%= link_to user_facebook_omniauth_authorize_path,
+              class: "btn btn-social-icon btn-facebook" do %>
+              <span class="fa fa-facebook"></span>
+            <% end %>
+            <%= link_to user_github_omniauth_authorize_path,
+              class: "btn btn-social-icon btn-github" do %>
+              <span class="fa fa-github"></span>
+            <% end %>
+            <%= link_to user_google_oauth2_omniauth_authorize_path,
+              class: "btn btn-social-icon btn-google" do %>
+              <span class="fa fa-google"></span> 
+            <% end %>
+            <%= link_to user_vkontakte_omniauth_authorize_path,
+              class: "btn btn-social-icon btn-vk" do %>
+              <span class="fa fa-vk"></span> 
+            <% end %>
+          </div>
+        </div>
+        <div class="form-group">
+          <%= render "devise/shared/links" %>
+        </div>
+      <% end %>    
     </div>
-
   </div>
 </div>
