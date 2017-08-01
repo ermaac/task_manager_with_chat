@@ -1,0 +1,12 @@
+.container
+  %h1 Your lists
+  .row
+    -@lists.each do |list|
+      .col.col-md-4
+        .panel.panel-default
+          .panel-heading
+            %a{href: edit_list_path(list)}
+              = list.title
+            %a.fa.fa-times.pull-right{href: list_path(list), :'data-method'=>'delete'}
+          .panel-body
+  %a.btn.btn-success.btn-lg{href: new_list_path} Add list

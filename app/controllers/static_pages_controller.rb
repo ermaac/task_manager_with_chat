@@ -2,8 +2,8 @@
 class StaticPagesController < ApplicationController
   before_action :authenticate_user!
   def home
-      @profile = Profile.find(current_user.id)
-      @board = Board.new
+    @user = current_user
+    @board = Board.new
   end
 
   def about; end

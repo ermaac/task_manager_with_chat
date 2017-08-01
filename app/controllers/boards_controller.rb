@@ -5,6 +5,11 @@ class BoardsController < ApplicationController
     @board = Board.new
   end
 
+  def show
+    session[:board_id] = params[:id]
+    redirect_to lists_path
+  end
+
   def create
     @board = Board.new(board_params)
     if @board.save
