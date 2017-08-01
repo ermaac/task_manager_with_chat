@@ -6,8 +6,10 @@ class User < ApplicationRecord
     github: 'gh_id'
   }.freeze
 
+  after_create :build_profile
   has_many :users_to_invite, class_name: 'Inviting', foreign_key: "invitor_id"
   has_many :invitors, class_name: 'Inviting', foreign_key: "user_to_invite_id"
+  has_one :profile
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
@@ -31,5 +33,11 @@ class User < ApplicationRecord
       user.email = auth.info.email
       user.password = Devise.friendly_token[0, 20]
     end
+  end
+
+  private
+
+  def build_profile
+    Profile.create(id: self.id, user_id: self.id)
   end
 end
