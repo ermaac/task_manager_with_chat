@@ -9,4 +9,4 @@
               = list.title
             %a.fa.fa-times.pull-right{href: list_path(list), :'data-method'=>'delete'}
           .panel-body
-  %a.btn.btn-success.btn-lg{href: new_list_path} Add list
+    = render 'shared/list_form'

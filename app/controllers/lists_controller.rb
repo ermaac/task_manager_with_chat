@@ -5,10 +5,10 @@ class ListsController < ApplicationController
     id = session[:board_id]
     @board = Board.find id
     @lists = @board.lists
+    @list = List.new
   end
 
   def new
-    @list = List.new
     @action = 'create'
     @form_name = 'Create list'
   end
