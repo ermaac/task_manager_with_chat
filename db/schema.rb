@@ -52,15 +52,6 @@ ActiveRecord::Schema.define(version: 20170727143627) do
     t.index ["board_id"], name: "index_lists_on_board_id"
   end
 
-
-  create_table "notes", force: :cascade do |t|
-    t.bigint "list_id"
-    t.string "title"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["list_id"], name: "index_notes_on_list_id"
-  end
-
   create_table "messages", force: :cascade do |t|
     t.text "text"
     t.bigint "profile_id"

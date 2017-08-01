@@ -1,0 +1,12 @@
+
+.container
+  %h1 Your boards
+  .row
+    -@boards.each do |board|
+      .col.col-md-4
+        .panel.panel-default
+          .panel-heading
+            %a{href: board_path(board)}
+              = board.title
+          .panel-body
+            = board.description
