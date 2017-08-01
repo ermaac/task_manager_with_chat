@@ -1,15 +1,18 @@
 class BoardsController < ApplicationController
-  def show
-    @board = Board.find(params[:id])
-  end
+  before_action :authenticate_user!
 
   def new
     @board = Board.new
-    render 'new'
   end
 
   def create
-
+    @board = Board.new(board_params)
+    if @board.save
+      redirect_to root_path
+    else
+      flash[:warning] = 'Fill the form'
+      redirect_to root_path
+    end
   end
 
 
@@ -17,5 +20,10 @@ class BoardsController < ApplicationController
   end
 
   def update
+
+  end
+  private
+  def board_params
+    params.require(:board).permit(:title, :description).merge(profile_id: current_user.id)  #something may go wrong
   end
 end

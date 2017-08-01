@@ -17,3 +17,6 @@
  textarea {
    resize: none;
  }
+ .board-description{
+   height: 50px;
+ }

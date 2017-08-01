@@ -1,18 +1,16 @@
 <div class="col-sm-6 col-md-3">
   <div class="thumbnail">
     <div class="caption">
-      <form>
+      <%= form_for(@board) do |f| %>
         <div class="form-group">
-          <input type="text" class="form-control" placeholder="Board name">
+          <%=f.text_field :title, class: "form-control",placeholder:"Board name" %>
         </div>
-        <br>
+          <br>
         <div class="form-group">
-          <textarea type="text" class="form-control" placeholder="Description..." rows="2"></textarea>
+          <%= f.text_area :description, class: "form-control",size: "auto x2",placeholder:"Description" %>
         </div>
-        <div class="btn-group btn-group-justified" role="group">
-          <a class="btn btn-success">Create new</a>
-        </div>
-      </form>
+        <%= f.submit "Create",class: "btn btn-success btn-block" %>
+      <% end %>
     </div>
   </div>
 </div>
