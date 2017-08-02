@@ -17,3 +17,8 @@
 .right {
     text-align: right;
 }
+
+.center {
+    margin-top: 10px;
+    text-align: center;
+}
