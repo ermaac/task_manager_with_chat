@@ -1,12 +1,6 @@
-.container
+.container-fluid
   %h1 Your lists
   .row
-    -@lists.each do |list|
-      .col.col-md-4
-        .panel.panel-default
-          .panel-heading
-            %a{href: edit_list_path(list)}
-              = list.title
-            %a.fa.fa-times.pull-right{href: list_path(list), :'data-method'=>'delete'}
-          .panel-body
-    =render 'shared/list_form'
+    - @lists.each do |list|
+      = render 'shared/list', list: list, notes: list.notes
+    = render 'shared/list_form'

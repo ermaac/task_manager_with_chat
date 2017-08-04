@@ -20,13 +20,15 @@ class BoardsController < ApplicationController
     end
   end
 
-
-  def delete
+  def destroy
+    @board = Board.find params[:id]
+    if @board.destroy
+      redirect_to '/'
+    else
+      flash[:notice] = "Error destroying board"
+    end
   end
 
-  def update
-
-  end
   private
   def board_params
     params.require(:board).permit(:title, :description).merge(user_id: current_user.id)  #something may go wrong

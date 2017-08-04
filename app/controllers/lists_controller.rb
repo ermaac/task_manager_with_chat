@@ -6,17 +6,14 @@ class ListsController < ApplicationController
     @board = Board.find id
     @lists = @board.lists
     @list = List.new
-    @inviting = Inviting.new
+    @note = Note.new
   end
 
   def new
-    @action = 'create'
-    @form_name = 'Create list'
   end
 
   def create
     @list = List.new list_params
-    @list.board_id = session[:board_id]
     if @list.save
       redirect_to lists_path
     else
@@ -40,13 +37,15 @@ class ListsController < ApplicationController
     end
   end
 
-  def list_params
-    params.require(:list).permit(:title)
-  end
-
   def destroy
     @list = List.find params[:id]
     @list.destroy
     redirect_to lists_path
+  end
+
+  private
+
+  def list_params
+    params.require(:list).permit(:title).merge(board_id: session['board_id'])
   end
 end

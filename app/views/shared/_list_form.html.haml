@@ -1,7 +1,5 @@
-.container
-  %h1= @form_name
-  = form_for @list, url: {action: @action} do |f|
-    .col-sm-3
-      .form-group
-        = f.text_field :title, class: 'form-control', required: true,placeholder: "title"
-        = f.submit @form_name, class: 'btn btn-success btn-block'
+= form_for @list do |f|
+  .col-md-2
+    .form-group
+      = f.text_field :title, class: 'form-control', required: true, placeholder: "List's title"
+      = f.submit @form_name, class: 'btn btn-success btn-block'
