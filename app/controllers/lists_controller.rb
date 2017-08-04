@@ -6,6 +6,7 @@ class ListsController < ApplicationController
     @board = Board.find id
     @lists = @board.lists
     @list = List.new
+    @inviting = Inviting.new
   end
 
   def new
