@@ -12,8 +12,6 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li><%= link_to "About"  , static_pages_about_path %></li>
-        <li><%= link_to "Help"   , static_pages_help_path %></li>
-        <li><%= link_to "Contact", static_pages_contact_path %></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <% unless user_signed_in? %>
@@ -36,8 +34,8 @@
                 </a>
               </li>
               <li>
-                <a href="#">
-                  <span class="badge">5</span>
+                <a href="/invitings">
+                  <span class="badge"><%= @number %></span>
                   <span> Invites</span>
                 </a>
               </li>

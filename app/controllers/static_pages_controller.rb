@@ -4,6 +4,7 @@ class StaticPagesController < ApplicationController
   def home
     @user = current_user
     @board = Board.new
+    @number = Inviting.where(user_to_invite_id: current_user.id).count
   end
 
   def about; end
