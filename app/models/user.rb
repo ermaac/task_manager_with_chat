@@ -8,6 +8,9 @@ class User < ApplicationRecord
 
   has_many :users_to_invite, class_name: 'Inviting', foreign_key: "invitor_id"
   has_many :invitors, class_name: 'Inviting', foreign_key: "user_to_invite_id"
+  has_many :boards, dependent: :destroy
+  has_many :messages, dependent: :destroy
+  has_many :disabled_lists, dependent: :destroy
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
