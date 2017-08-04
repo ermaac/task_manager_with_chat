@@ -7,4 +7,5 @@ Rails.application.routes.draw do
   get 'static_pages/contact'
   resources :boards, :lists, :invitings
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+  delete 'invitings', to: 'invitings#destroy'
 end
