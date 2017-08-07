@@ -13,6 +13,7 @@ class BoardsController < ApplicationController
   def create
     @board = Board.new(board_params)
     if @board.save
+      UserBoard.create user: current_user, board: @board
       redirect_to root_path
     else
       flash[:warning] = 'Fill the form'
@@ -31,6 +32,6 @@ class BoardsController < ApplicationController
 
   private
   def board_params
-    params.require(:board).permit(:title, :description).merge(user_id: current_user.id)  #something may go wrong
+    params.require(:board).permit(:title, :description)#.merge(user_id: current_user.id)  #something may go wrong
   end
 end
