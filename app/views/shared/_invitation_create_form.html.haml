@@ -1,7 +1,7 @@
 .container
   .input_form
     %h1= @form_name
-    = form_for(@inviting) do |f|
+    = form_for(@invitation) do |f|
       .col-sm-3
         .form-group
           = f.text_field :user_to_invite_id, class: 'form-control', required: true,placeholder: "email"
