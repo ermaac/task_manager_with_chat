@@ -6,7 +6,7 @@ class User < ApplicationRecord
     github: 'gh_id'
   }.freeze
 
-  after_create :build_profile
+  after_create :create_profile
   has_many :users_to_invite, class_name: 'Inviting', foreign_key: "invitor_id"
   has_many :invitors, class_name: 'Inviting', foreign_key: "user_to_invite_id"
   has_one :profile
@@ -37,7 +37,7 @@ class User < ApplicationRecord
 
   private
 
-  def build_profile
-    Profile.create(id: self.id, user_id: self.id)
+  def create_profile
+    Profile.create(id: id, user_id: id)
   end
 end

@@ -10,7 +10,7 @@
   </div>
   <br>
   <div class="input-group">
-   <%= f.select(:sex, ['M', 'W'], {}, { :class => 'form-control' }) %>
+    <%= f.select :sex, Profile.sexes.keys, {}, { class: 'form-control' } %>
   </div>
   <br>
   <div class="input-group form-group">
@@ -21,5 +21,5 @@
   </div>
   <%= f.submit "Update Profile", class:"btn btn-primary" %>
 <% end %>
-
+<br>
 <%= image_tag(@profile.photo_url) if @profile.photo_url? %>

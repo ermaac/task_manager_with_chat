@@ -5,8 +5,13 @@ class ProfilesController < ApplicationController
   end
 
   def update
-    @profile.update(profile_params)
-    redirect_to @profile
+    if @profile.update(profile_params)
+      flash[:success] = "Profile updated"
+      redirect_to @profile
+    else
+      flash[:error] = @profile.errors.full_messages.join('\n')
+      redirect_to @profile
+    end
   end
 
   private
