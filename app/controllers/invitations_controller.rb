@@ -1,7 +1,7 @@
-class InvitingsController < ApplicationController
+class InvitationsController < ApplicationController
   before_action :authenticate_user!
   def index
-    @invite = Inviting.where(user_to_invite_id: current_user.id)
+    @invite = Invitation.where(user_to_invite_id: current_user.id)
   end
 
   def new
@@ -14,18 +14,19 @@ class InvitingsController < ApplicationController
     @invitor_id = current_user.id
     @user_to_invite_id = User.find_by(email:@inviting_user).id
     inviting_params = {board_id: @board_id,invitor_id: @invitor_id,user_to_invite_id: @user_to_invite_id}
-    @inviting = Inviting.new(inviting_params)
-    if @inviting.save
+    @invitation = Invitation.new(inviting_params)
+    if @invitation.save
       flash[:success] = "inviting successfuly was sent"
-      redirect_to invitings_path
+      redirect_to invitations_path
     else
       flash[:warning] = "inviting  wasn't sent"
-      redirect_to invitings_path
+      redirect_to invitations_path
     end
   end
+
   def destroy
-    @invite = Inviting.find_by(user_to_invite_id: current_user.id).destroy
-    redirect_to '/invitings'
+    @invite = Invitation.find_by(user_to_invite_id: current_user.id).destroy
+    redirect_to invitations_path
   end
 
 end

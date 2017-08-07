@@ -1,0 +1,10 @@
+.col.col-md-2
+  .panel.panel-default
+    .panel-heading
+      %a{href: edit_list_path(list)}
+        = list.title
+      %a.fa.fa-times.pull-right{href: list_path(list), :'data-method'=>'delete'}
+    .panel-body
+      - notes.each do |note|
+        = render 'shared/note', note: note
+      = render 'shared/note_form', list_id: list.id

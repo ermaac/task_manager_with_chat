@@ -2,8 +2,9 @@
 
 class Board < ApplicationRecord
   has_many :lists, dependent: :destroy
-  has_many :invitings, dependent: :destroy
+  has_many :invitations, dependent: :destroy
   has_one :chat, dependent: :destroy
-  belongs_to :user
+  has_many :user_boards
+  has_many :users, through: :user_boards
   validates :title, :description, presence: true
 end

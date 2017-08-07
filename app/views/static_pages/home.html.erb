@@ -1,7 +1,7 @@
 <% provide(:title, 'Home') %>
 
 <div class="row">
-  <% @user.boards.each do |b|%>
+  <% @boards.each do |b|%>
     <%= render "shared/board", b: b %>
   <% end %>
   <%= render "shared/create_board" %>
