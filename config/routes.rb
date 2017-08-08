@@ -6,5 +6,5 @@ Rails.application.routes.draw do
   get 'static_pages/help'
   get 'static_pages/contact'
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
-  resources :profiles, only: [:show, :update]
+  resources :profiles, only: [:show, :update, :edit]
 end

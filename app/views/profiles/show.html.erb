@@ -1,25 +1,15 @@
-<%= form_for @profile, url: profile_path, html: { multipart: true } do |f| %>
-  <div class="input-group form-group">
-    <%= f.text_field :first_name, { class: "form-control", placeholder: "First Name", autofocus: true } %>
+<div class="container">
+  <div class="span3 well">
+      <center>
+        <%= link_to edit_profile_path(current_user) do %>
+          <% if @profile.photo_url.nil? %>
+            <%= image_tag "/images/fallback/missing.png", class: "img-circle", size: "140x140" %>
+          <% else %>
+            <%= image_tag @profile.photo_url, class: "img-circle", size: "140x140" %>
+          <% end %>
+        <% end %>
+        <h3><%= @profile.first_name %> <%= @profile.last_name %></h3>
+        <%= link_to 'Edit Profile', edit_profile_path(current_user), class: "btn btn-primary" %>
+    </center>
   </div>
-  <div class="input-group form-group">
-    <%= f.text_field :last_name, { class: "form-control", placeholder: "Last Name" } %>
-  </div>
-  <div class="input-group">
-    <%= f.date_field :birthdate, { class: "form-control", type: "date" } %>
-  </div>
-  <br>
-  <div class="input-group">
-    <%= f.select :sex, Profile.sexes.keys, {}, { class: 'form-control' } %>
-  </div>
-  <br>
-  <div class="input-group form-group">
-    <%= f.text_field :phone, { class: "form-control", placeholder: "Phone" } %>
-  </div>
-  <div class="input-group form-group">
-    <%= f.file_field :photo_url %>
-  </div>
-  <%= f.submit "Update Profile", class:"btn btn-primary" %>
-<% end %>
-<br>
-<%= image_tag(@profile.photo_url) if @profile.photo_url? %>
+</div>

@@ -1,0 +1,68 @@
+<div class="authform">
+  <div class="panel panel-default">
+    <div class="panel-heading text-center">
+      <% if @profile.photo_url.nil? %>
+        <%= image_tag "/images/fallback/missing.png", class: "img-circle", size: "140x140" %>
+      <% else %>
+        <%= image_tag @profile.photo_url, class: "img-circle", size: "140x140" %>
+      <% end %>
+    </div>
+    <div class="panel-body">
+      <%= form_for @profile, url: profile_path, html: { multipart: true } do |f| %>
+        <div class="input-group form-group">
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+          </span>
+          <%= f.text_field :first_name, {
+            class: "form-control", placeholder: "First Name", autofocus: true
+          }%>
+        </div>
+        <div class="input-group form-group">
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+          </span>
+          <%= f.text_field :last_name, {
+            class: "form-control", placeholder: "Last Name", autocomplete: "off"
+          }%>
+        </div>
+        <div class="input-group form-group">
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+          </span>
+          <%= f.date_field :birthdate, {
+            class: "form-control", placeholder: "Birthdate", autocomplete: "off"
+          }%>
+        </div>
+        <div class="input-group form-group">
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+          </span>
+            <%= f.select :sex, Profile.sexes.keys, {}, { class: 'form-control' } %>
+        </div>
+        <div class="input-group form-group">
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-earphone" aria-hidden="true"></span>
+          </span>
+            <%= f.text_field :phone, {
+            class: "form-control", placeholder: "Phone number", autocomplete: "off"
+            }%>
+        </div>
+        <div class="input-group form-group">
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>
+          </span>
+          <% if @profile.photo_url? %>
+            <%= f.file_field :photo_url, style: 'color: transparent' %>
+          <% else %>
+            <%= f.file_field :photo_url %>
+          <% end %>
+        </div>
+        <div class="form-group">
+          <%= f.submit "Update Profile", :class =>'btn btn-primary' %>
+          <%= link_to 'Back', profile_path(current_user), class: "btn btn-success" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
