@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170802075610) do
+ActiveRecord::Schema.define(version: 20170808130934) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 20170802075610) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "description"
-    t.bigint "profile_id"
+    t.bigint "creator_id"
   end
 
   create_table "chats", force: :cascade do |t|
@@ -29,19 +29,12 @@ ActiveRecord::Schema.define(version: 20170802075610) do
     t.index ["board_id"], name: "index_chats_on_board_id"
   end
 
-  create_table "disabled_lists", force: :cascade do |t|
-    t.bigint "profile_id"
-    t.bigint "list_id"
-    t.index ["list_id"], name: "index_disabled_lists_on_list_id"
-    t.index ["profile_id"], name: "index_disabled_lists_on_profile_id"
-  end
-
-  create_table "invitings", force: :cascade do |t|
+  create_table "invitations", force: :cascade do |t|
     t.bigint "board_id"
     t.bigint "invitor_id"
     t.bigint "user_to_invite_id"
     t.boolean "accepted", default: false
-    t.index ["board_id"], name: "index_invitings_on_board_id"
+    t.index ["board_id"], name: "index_invitations_on_board_id"
   end
 
   create_table "lists", force: :cascade do |t|
@@ -49,15 +42,16 @@ ActiveRecord::Schema.define(version: 20170802075610) do
     t.string "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "is_disabled"
     t.index ["board_id"], name: "index_lists_on_board_id"
   end
 
   create_table "messages", force: :cascade do |t|
     t.text "text"
-    t.bigint "profile_id"
+    t.bigint "user_id"
     t.bigint "chat_id"
     t.index ["chat_id"], name: "index_messages_on_chat_id"
-    t.index ["profile_id"], name: "index_messages_on_profile_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
   create_table "notes", force: :cascade do |t|
@@ -77,6 +71,13 @@ ActiveRecord::Schema.define(version: 20170802075610) do
     t.bigint "user_id"
     t.integer "sex"
     t.index ["user_id"], name: "index_profiles_on_user_id"
+  end
+
+  create_table "user_boards", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "board_id"
+    t.index ["board_id"], name: "index_user_boards_on_board_id"
+    t.index ["user_id"], name: "index_user_boards_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -101,6 +102,6 @@ ActiveRecord::Schema.define(version: 20170802075610) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "invitings", "users", column: "invitor_id"
-  add_foreign_key "invitings", "users", column: "user_to_invite_id"
+  add_foreign_key "invitations", "users", column: "invitor_id"
+  add_foreign_key "invitations", "users", column: "user_to_invite_id"
 end
