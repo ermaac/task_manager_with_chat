@@ -5,6 +5,7 @@ class DashboardController < ApplicationController
     @board = Board.new
     @boards = current_user.boards
     @number = Invitation.where(user_to_invite_id: current_user.id).count
+    @messages = Message.all
     render 'static_pages/home'
   end
 
