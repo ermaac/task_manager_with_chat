@@ -2,7 +2,7 @@
 
 Rails.application.routes.draw do
   root 'dashboard#index'
-  get 'dashboard/:id', to: 'dashboard#show'
+  get 'dashboard/:id', to: 'dashboard#show', as: :dashboard
   get 'static_pages/about'
   get 'static_pages/help'
   get 'static_pages/contact'
