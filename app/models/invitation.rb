@@ -22,4 +22,5 @@ class Invitation < ApplicationRecord
       errors.add(:user_to_invite, "must be uniq")
     end
   end
+
 end
