@@ -1,9 +1,10 @@
+= render 'shared/delete_confirmation', object_type: 'list', path: list_path(list), modal_id: list.object_id
 .col.col-md-2
   .panel.panel-default
     .panel-heading
       %a{href: edit_list_path(list)}
         = list.title
-      %a.fa.fa-times.pull-right{href: list_path(list), :'data-method'=>'delete'}
+      %a.fa.fa-times.pull-right{'data-toggle': 'modal', href: "##{list.object_id}"}
     .panel-body
       - notes.each do |note|
         = render 'shared/note', note: note
