@@ -1,9 +1,6 @@
 <%= render 'shared/delete_confirmation', path: board_path(b), modal_id: b.object_id, object_type: 'board' %>
 <div class="col-sm-6 col-md-3">
   <div class="thumbnail">
-    <a href=<%= "##{b.object_id}" %> data-toggle="modal">
-      <div class='fa fa-times pull-right'></div>
-    </a>
     <div class="caption">
       <h3><%= b.title %></h3>
       <div class="board-description"> <%= b.description %></div>

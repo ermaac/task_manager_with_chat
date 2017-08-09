@@ -1,0 +1,11 @@
+<div class="dropdown">
+  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Connected users
+    <span class="caret"></span></button>
+  <ul class="dropdown-menu">
+    <% @board.users.each do |user| %>
+      <li >
+        <%= render 'shared/dropdown_for_users', user: user %>
+      </li>
+    <% end %>
+  </ul>
+</div>

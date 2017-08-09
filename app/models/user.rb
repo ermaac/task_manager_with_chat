@@ -11,7 +11,7 @@ class User < ApplicationRecord
   has_many :user_boards, dependent: :destroy
   has_many :boards, through: :user_boards
   has_many :messages, dependent: :destroy
-
+  has_one :profile
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, omniauth_providers: %i[facebook google_oauth2 github vkontakte]
