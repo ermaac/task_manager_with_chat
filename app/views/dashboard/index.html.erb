@@ -5,3 +5,8 @@
   <% end %>
   <%= render "shared/create_board" %>
 </div>
+
+<h1>Chat room</h1>
+ <div id="messages">
+  <%= render @messages %>
+   </div> <form> <label>Say something:</label><br> <input type="text" data-behavior="room_speaker"> </form>

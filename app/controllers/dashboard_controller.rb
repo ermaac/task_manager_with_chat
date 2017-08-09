@@ -6,6 +6,7 @@ class DashboardController < ApplicationController
     @board = Board.new
     @boards = current_user.boards
     @number = Invitation.where(user_to_invite_id: current_user.id).count
+    @messages = Message.all
   end
   def current_user_board
     user_boards = User.find(current_user.id).boards
