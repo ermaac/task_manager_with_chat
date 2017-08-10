@@ -24,7 +24,6 @@ gem 'carrierwave'
 gem 'mini_magick'
 gem 'haml', '~>5.0.1'
 
-
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'pry-nav'
