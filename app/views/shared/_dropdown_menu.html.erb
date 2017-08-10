@@ -3,8 +3,14 @@
     <span class="caret"></span></button>
   <ul class="dropdown-menu">
     <% @board.users.each do |user| %>
-      <li >
-        <%= render 'shared/dropdown_for_users', user: user %>
+      <li>
+        <% if user.id == current_user.id && @board.creator_id != user.id%>
+          <a href="#user<%= user.id %>" role="button" class="btn btn-success" data-toggle="modal" ><%= "#{user.profile.first_name}"+' '+"#{user.profile.last_name}" %></a>
+        <% elsif @board.creator_id == user.id %>
+          <a href="#user<%= user.id %>" role="button" class="btn btn-danger" data-toggle="modal" ><%= "#{user.profile.first_name}"+' '+"#{user.profile.last_name}" %></a>
+        <% else %>
+          <a href="#user<%= user.id %>" role="button" class="btn btn-info" data-toggle="modal" ><%= "#{user.profile.first_name}"+' '+"#{user.profile.last_name}" %></a>
+        <% end %>
       </li>
     <% end %>
   </ul>

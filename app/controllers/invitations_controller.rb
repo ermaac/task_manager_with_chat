@@ -1,6 +1,20 @@
 class InvitationsController < ApplicationController
   before_action :authenticate_user!
   before_action :board_exist, :user_email_presence, only: :create
+
+  def board_exist
+    if Board.where(title: params[:send][:board_title].chomp).count == 0
+      flash[:warning] = "this board don't exist"
+      redirect_to invitations_path
+    end
+  end
+  def user_email_presence
+    if User.where(email: params[:send][:inviting_user].chomp).empty?
+      flash[:warning] = "this user don't exist"
+      redirect_to invitations_path
+    end
+  end
+
   def index
     @invite = Invitation.where(user_to_invite_id: current_user.id)
   end
@@ -14,7 +28,7 @@ class InvitationsController < ApplicationController
       flash[:success] = "inviting successfuly was sent"
       redirect_to invitations_path
     else
-      flash[:warning] = "inviting  wasn't sent"
+      flash[:warning] = "#{@invitation.errors.messages}"
       redirect_to invitations_path
     end
   end
@@ -23,18 +37,6 @@ class InvitationsController < ApplicationController
     invite_id = params[:id]
     @invite = Invitation.find(invite_id).destroy
     redirect_to invitations_path
-  end
-  def board_exist
-    if Board.where(title: params[:send][:board_title].chomp).count == 0
-      flash[:warning] = "this board don't exist"
-      redirect_to invitations_path
-    end
-  end
-  def user_email_presence
-    if User.where(email: params[:send][:inviting_user].chomp).count == 0
-      flash[:warning] = "this user don't exist"
-      redirect_to invitations_path
-    end
   end
   private
   def prepare_params

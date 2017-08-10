@@ -5,3 +5,5 @@
     -@lists.each do |list|
       =render 'shared/list', list: list, notes: list.notes
     =render 'shared/list_form'
+    -@board.users.each do |user|
+      =render 'shared/dropdown_for_users', user: user
