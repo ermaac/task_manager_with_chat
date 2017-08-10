@@ -1,4 +1,4 @@
-= render 'shared/delete_confirmation', object_type: 'list', path: list_path(list), modal_id: list.object_id
+= render 'shared/delete_confirmation', object_type: 'list', path: board_list_path(@board, list), modal_id: list.object_id
 = render 'lists/edit_list', modal_id: list.object_id, list: list
 - list_is_disabled = list.is_disabled
 .col.col-md-2
@@ -12,7 +12,7 @@
       - if !list_is_disabled
         %a.fa.fa-times.pull-right{'data-toggle': 'modal', href: "#delete_#{list.object_id}"}
       - if @is_creator
-        %a.fa.fa-ban.pull-right{href: switch_list_editability_path(list), 'data-method': 'put'}
+        %a.fa.fa-ban.pull-right{href: switch_list_editability_path(@board, list), 'data-method': 'put'}
     .panel-body
-      = render partial: 'notes/note', collection: list.notes, locals: {list_is_disabled: list_is_disabled}
+      = render partial: 'notes/note', collection: list.notes.order('created_at asc'), locals: {list: list}
       = render 'notes/note_form', list: list

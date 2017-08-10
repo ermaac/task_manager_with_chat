@@ -10,7 +10,7 @@
       .modal-body
         .row
           .col-sm-offset-2
-            = form_for list do |f|
+            = form_for list, url: board_list_path(@board, list) do |f|
               .input-group.form-group
                 = f.text_field :title, class: 'form-control col-xs-9', required: true, placeholder: "Note's content"
               = f.submit 'Update note', class: 'btn btn-primary col-xs-9'

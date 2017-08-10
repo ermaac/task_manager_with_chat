@@ -7,12 +7,12 @@ Rails.application.routes.draw do
   get 'static_pages/help'
   get 'static_pages/contact'
   resources :invitations
-  resources :boards, shallow: true do
-    resources :lists, shallow: true do
+  resources :boards do
+    resources :lists do
       resources :notes
     end
   end
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
   post 'user_boards', to: 'dashboards#create', as: 'user_boards'
-  put 'lists/:id/switch_editability', to: 'lists#switch_editability', as: :switch_list_editability
+  put '/boards/:board_id/lists/:id/switch_editability', to: 'lists#switch_editability', as: :switch_list_editability
 end

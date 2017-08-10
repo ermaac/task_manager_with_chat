@@ -9,7 +9,7 @@ class DashboardsController < ApplicationController
   end
 
   def current_user_board
-    user_boards = User.find(current_user.id).boards
+    user_boards = current_user.boards
     if !user_boards.ids.include?(params[:id].chomp.to_i)
       flash[:warning] = "you don't have accepted to this board"
       redirect_to root_path
