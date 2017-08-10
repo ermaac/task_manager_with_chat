@@ -1,0 +1,17 @@
+.modal.fade{role: 'dialog', id: "#{modal_id}"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button{type: 'button', class: 'close', 'data-dismiss': 'modal'}
+          &times;
+        .text-center
+          %h4
+            Confirm removing
+      .modal-body
+        .text-center
+          %p= "Are sure to remove this #{object_type}?"
+      .modal-footer
+        .btn.btn-success{'data-dismiss': 'modal'}
+          Cancel
+        %a.btn.btn-danger{href: path, 'data-method': 'delete'}
+          Confirm

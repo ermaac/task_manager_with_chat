@@ -32,6 +32,6 @@ class BoardsController < ApplicationController
 
   private
   def board_params
-    params.require(:board).permit(:title, :description)#.merge(user_id: current_user.id)  #something may go wrong
+    params.require(:board).permit(:title, :description).merge(creator_id: current_user.id)  #something may go wrong
   end
 end
