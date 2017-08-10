@@ -12,7 +12,7 @@
       - if !list_is_disabled
         %a.fa.fa-times.pull-right{'data-toggle': 'modal', href: "#delete_#{list.object_id}"}
       - if @is_creator
-        %a.fa.fa-ban.pull-right{href: switch_list_editability_path(list)}
+        %a.fa.fa-ban.pull-right{href: switch_list_editability_path(list), 'data-method': 'put'}
     .panel-body
       = render partial: 'notes/note', collection: list.notes, locals: {list_is_disabled: list_is_disabled}
-      = render 'notes/note_form', list_id: list.id, list_is_disabled: list_is_disabled
+      = render 'notes/note_form', list: list

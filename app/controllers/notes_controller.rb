@@ -5,6 +5,7 @@ class NotesController < ApplicationController
 
   def create
     @note = Note.new note_params
+    @note.list_id = params[:list_id]
     flash[:notice] = "Error creating note" unless @note.save
     redirect_to dashboard_path(session[:board_id])
   end
@@ -24,6 +25,6 @@ class NotesController < ApplicationController
   private
 
   def note_params
-    params.require(:note).permit(:text, :list_id)
+    params.require(:note).permit(:text)
   end
 end
