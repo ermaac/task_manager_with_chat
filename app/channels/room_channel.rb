@@ -1,4 +1,5 @@
 class RoomChannel < ApplicationCable::Channel
+
   def subscribed
     stream_from "room_channel"
   end
@@ -8,13 +9,10 @@ class RoomChannel < ApplicationCable::Channel
   end
 
   def speak(data)
-    Message.create(text: data['message'], user_id: current_user.id, chat_id: 1)
+    Message.create(text: data['message'], user_id: User.last.id, chat_id: Chat.last.id)
   end
 
-
-
+   # def current_user
+   #   @current_user ||= session[:current_user_id] && User.find_by_id(session[:current_user_id])
+   # end
 end
-
-# Board.create! title:'sadsadsadsa', description: 'asdasdsadsa' => Board:0x000000047aeaf0 id: 5,
-# Chat.create! board_id: 5 =>=> #<Chat:0x000000046b8128 id: 1, board_id: 5, enabled: nil>
-# Message.create! text: '123', user_id: 1, chat_id: 1

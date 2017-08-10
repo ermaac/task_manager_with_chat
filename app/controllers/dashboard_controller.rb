@@ -21,6 +21,7 @@ class DashboardController < ApplicationController
     @lists = @board.lists
     @list = List.new
     @note = Note.new
+    @messages = Message.all
   end
   def create
     user_board = UserBoard.new(user_board_params)

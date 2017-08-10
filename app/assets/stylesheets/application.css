@@ -20,3 +20,12 @@
  .board-description{
    height: 50px;
  }
+
+#block_for_chat {
+     color: red;
+     float:right;
+     margin-right: -650px;
+     position: relative; 
+     bottom: 200px;
+   }
+
