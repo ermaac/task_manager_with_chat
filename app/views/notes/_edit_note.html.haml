@@ -1,0 +1,16 @@
+.modal.fade.bs-example-modal-sm{role: 'dialog', id: "edit_#{modal_id}"}
+  .modal-dialog.modal-sm
+    .modal-content
+      .modal-header
+        %button{type: 'button', class: 'close', 'data-dismiss': 'modal'}
+          &times;
+        .text-center
+          %h4
+            Update note
+      .modal-body
+        .row
+          .col-sm-offset-2
+            = form_for note do |f|
+              .input-group.form-group
+                = f.text_area :text, class: 'form-control col-xs-9', required: true, placeholder: "List's title"
+              = f.submit 'Update note', class: 'btn btn-primary col-xs-9'

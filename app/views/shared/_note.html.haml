@@ -1,6 +1,0 @@
-= render 'shared/delete_confirmation', object_type: 'note', path: note_path(note), modal_id: note.object_id
-%a{'data-toggle': 'modal', href: "##{note.object_id}"}
-  .fa.fa-times.pull-right
-.panel.panel-default
-  .panel-body
-    %p= note.text

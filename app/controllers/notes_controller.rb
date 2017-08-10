@@ -5,20 +5,20 @@ class NotesController < ApplicationController
 
   def create
     @note = Note.new note_params
-    if @note.save
-      redirect_to lists_path
-    else
-      flash[:notice] = "Error creating note"
-    end
+    flash[:notice] = "Error creating note" unless @note.save
+    redirect_to dashboard_path(session[:board_id])
   end
 
   def destroy
     @note = Note.find params[:id]
-    if @note.destroy
-      redirect_to lists_path
-    else
-      flash[:notice] = "Error destroying note"
-    end
+    flash[:error] = "Error destroying note" unless @note.destroy
+    redirect_to dashboard_path(session[:board_id])
+  end
+
+  def update
+    @note = Note.find params[:id]
+    flash[:error] = "Error updating note" unless @note.update note_params
+    redirect_to dashboard_path(session[:board_id])
   end
 
   private

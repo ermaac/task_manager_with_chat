@@ -1,7 +1,0 @@
-.container-fluid
-  =render 'shared/menu_bar'
-  %h1 Your lists
-  .row
-    -@lists.each do |list|
-      =render 'shared/list', list: list, notes: list.notes
-    =render 'shared/list_form'

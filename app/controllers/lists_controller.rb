@@ -4,7 +4,7 @@ class ListsController < ApplicationController
   def index
     id = session[:board_id]
     @board = Board.find id
-    @lists = @board.lists
+    @lists = @board.lists.order('created_at asc')
     @list = List.new
     @note = Note.new
   end
@@ -14,38 +14,32 @@ class ListsController < ApplicationController
 
   def create
     @list = List.new list_params
-    if @list.save
-      redirect_to lists_path
-    else
-      render :new
-    end
-  end
-
-  def edit
-    @list = List.find params[:id]
-    @action = 'update'
-    @form_name = 'Edit list'
-    render :edit
+    flash[:error] = "An error ocured while creating list" unless @list.save
+    redirect_to dashboard_path(session[:board_id])
   end
 
   def update
     @list = List.find params[:id]
-    if @list.update list_params
-      redirect_to lists_path
-    else
-      render :edit
-    end
+    flash[:error] = "An error ocured while updating list" unless @list.update list_params
+    redirect_to dashboard_path(session[:board_id])
+  end
+
+  def switch_editability
+    list = List.find params[:id]
+    list.is_disabled = !list.is_disabled
+    list.save
+    redirect_to dashboard_path(session[:board_id])
   end
 
   def destroy
     @list = List.find params[:id]
     @list.destroy
-    redirect_to lists_path
+    redirect_to dashboard_path(session[:board_id])
   end
 
   private
 
   def list_params
-    params.require(:list).permit(:title).merge(board_id: session['board_id'])
+    params.require(:list).permit(:title, :is_disabled).merge(board_id: session['board_id'])
   end
 end
