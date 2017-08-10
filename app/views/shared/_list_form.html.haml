@@ -1,0 +1,5 @@
+= form_for @list do |f|
+  .col-md-2
+    .form-group
+      = f.text_field :title, class: 'form-control', required: true, placeholder: "List's title"
+      = f.submit @form_name, class: 'btn btn-success btn-block'

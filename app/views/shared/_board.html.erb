@@ -1,0 +1,12 @@
+<%= render 'shared/delete_confirmation', path: board_path(b), modal_id: b.object_id, object_type: 'board' %>
+<div class="col-sm-6 col-md-3">
+  <div class="thumbnail">
+    <div class="caption">
+      <h3><%= b.title %></h3>
+      <div class="board-description"> <%= b.description %></div>
+      <div class="btn-group btn-group-justified" role="group">
+        <a class="btn btn-primary btn-block" href='<%= dashboard_path(b) %>'>Open</a>
+      </div>
+    </div>
+  </div>
+</div>

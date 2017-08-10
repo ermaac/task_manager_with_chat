@@ -1,0 +1,17 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#"><%= @board.title %></a>
+    </div>
+    <ul class="nav navbar-nav navbar-right">
+      <li>
+        <%= render 'shared/dropdown_menu' %>
+      </li>
+      <% if @board.creator_id == current_user.id %>
+        <li>
+          <%= button_to "Delete board", board_path(@board),method: :delete, class:"btn btn-danger", data: { confirm: "Are you shure?" } %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</nav>

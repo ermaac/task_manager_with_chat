@@ -9,7 +9,10 @@ class User < ApplicationRecord
   after_create :create_profile
   has_many :users_to_invite, class_name: 'Inviting', foreign_key: "invitor_id"
   has_many :invitors, class_name: 'Inviting', foreign_key: "user_to_invite_id"
-  has_one :profile
+  has_many :user_boards, dependent: :destroy
+  has_many :boards, through: :user_boards
+  has_many :messages, dependent: :destroy
+  has_one  :profile, dependent: :destroy
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
@@ -29,7 +32,7 @@ class User < ApplicationRecord
 
   def self.from_omniauth(auth)
     provider_uid = get_uid(auth.provider.to_sym)
-    where(provider: auth.provider, provider_uid => auth.uid).first_or_create do |user|
+    where(email: auth.info.email).first_or_create do |user|
       user.email = auth.info.email
       user.password = Devise.friendly_token[0, 20]
     end

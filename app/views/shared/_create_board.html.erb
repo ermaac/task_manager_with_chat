@@ -1,0 +1,15 @@
+<div class="col-sm-6 col-md-3">
+  <div class="thumbnail">
+    <div class="caption">
+      <%= form_for(@board) do |f| %>
+        <div class="form-group">
+          <%=f.text_field :title, class: "form-control",placeholder:"Board name", required: true %>
+        </div>
+        <div class="form-group">
+          <%= f.text_area :description, class: "form-control",size: "auto x2",placeholder:"Description", required: true %>
+        </div>
+        <%= f.submit "Create",class: "btn btn-success btn-block" %>
+      <% end %>
+    </div>
+  </div>
+</div>
