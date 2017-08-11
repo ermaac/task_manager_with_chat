@@ -1,5 +1,0 @@
-= form_for @note do |f|
-  .form-group
-    = f.text_area :text, class: 'form-control', required: true, placeholder: "New note", size: 'auto x2'
-    = f.hidden_field :list_id, value: list_id
-    = f.submit @form_name, class: 'btn btn-success btn-block'

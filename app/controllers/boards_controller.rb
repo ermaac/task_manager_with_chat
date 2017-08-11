@@ -1,30 +1,19 @@
 class BoardsController < ApplicationController
-  before_action :authenticate_user!
-
-  def new
-    @board = Board.new
-  end
-
-  def show
-    session[:board_id] = params[:id]
-    redirect_to lists_path
-  end
-
   def create
     @board = Board.new(board_params)
+    @board.creator_id = current_user.id
     if @board.save
       UserBoard.create user: current_user, board: @board
-      redirect_to root_path
     else
       flash[:warning] = 'Fill the form'
-      redirect_to root_path
     end
+    redirect_to root_path
   end
 
   def destroy
     @board = Board.find params[:id]
     if @board.destroy
-      redirect_to '/'
+      redirect_to root_path
     else
       flash[:notice] = "Error destroying board"
     end
@@ -32,6 +21,6 @@ class BoardsController < ApplicationController
 
   private
   def board_params
-    params.require(:board).permit(:title, :description).merge(creator_id: current_user.id)  #something may go wrong
+    params.require(:board).permit(:title, :description)
   end
 end

@@ -1,0 +1,16 @@
+.modal.fade.bs-example-modal-sm{role: 'dialog', id: "update_#{modal_id}"}
+  .modal-dialog.modal-sm
+    .modal-content
+      .modal-header
+        %button{type: 'button', class: 'close', 'data-dismiss': 'modal'}
+          &times;
+        .text-center
+          %h4
+            Update list
+      .modal-body
+        .row
+          .col-sm-offset-2
+            = form_for list, url: board_list_path(@board, list) do |f|
+              .input-group.form-group
+                = f.text_field :title, class: 'form-control col-xs-9', required: true, placeholder: "Note's content"
+              = f.submit 'Update note', class: 'btn btn-primary col-xs-9'
