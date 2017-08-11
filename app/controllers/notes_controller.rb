@@ -21,6 +21,13 @@ class NotesController < ApplicationController
     end
   end
 
+  def update
+    @note = Note.find params[:id]
+    @lists = List.where(board_id: session[:board_id])
+    @note.update(list_id: params[:list_id])
+    redirect_to lists_path
+  end 
+
   private
 
   def note_params

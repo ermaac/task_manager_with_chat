@@ -1,6 +1,29 @@
 = render 'shared/delete_confirmation', object_type: 'note', path: note_path(note), modal_id: note.object_id
 %a{'data-toggle': 'modal', href: "##{note.object_id}"}
   .fa.fa-times.pull-right
+%a{"data-target" => ".bd-example-modal-sm", "data-toggle" => "modal", :type => "button"}
+  .fa.fa-location-arrow
+.modal.fade.bd-example-modal-sm{role: 'dialog', :tabindex => "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button{type: 'button', class: 'close', 'data-dismiss': 'modal'}
+          &times;
+        .text-center
+          %h4
+            Move note to another list
+      .modal-body
+        .dropdown
+          %a.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :role => "button"}
+            .text-center
+              %p Scroll of Lists
+              %span.caret
+          %ul.dropdown-menu{"aria-labelledby" => "dLabel", :role => "menu"}
+            - @lists.each do |list|
+              %li
+                = link_to list.title,note_path(note, list_id: list.id),method: :patch
+          
 .panel.panel-default
   .panel-body
     %p= note.text
+    
