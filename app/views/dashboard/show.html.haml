@@ -16,16 +16,13 @@
             Chat
           .panel-body
             %ul.chat
-              %li.left.clearfix
-                %span.chat-img.pull-left
-
+              %left.clearfix
                 .chat-body.clearfix
                   .header
                     %strong.primary-font 
                       #messages
                         = render @messages
                     %small.pull-right.text-muted
-                      %span.glyphicon.glyphicon-time>
           .panel-footer
             .input-group
               %input#btn-input.form-control.input-sm{"data-behavior" => "room_speaker", :type => "text"}/
