@@ -1,6 +1,8 @@
 .container-fluid
   %h1 Your lists
-  .row
-    - @lists.each do |list|
-      = render 'shared/list', list: list, notes: list.notes
-    = render 'shared/list_form'
+  #row_for_chat
+    .row
+      - @lists.each do |list|
+        = render 'shared/list', list: list, notes: list.notes
+      = render 'shared/list_form'
+=render 'shared/chat'

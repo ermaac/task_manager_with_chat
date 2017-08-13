@@ -1,0 +1,19 @@
+#block_for_chat
+  .container
+    .row
+      .col-md-5
+        .panel.panel-primary
+          .panel-heading
+            %span.glyphicon.glyphicon-comment
+            Chat
+          .panel-body
+            %ul.chat
+              %left.clearfix
+                .chat-body.clearfix
+                  .header
+                    %strong.primary-font 
+                      #messages
+                        = render @messages
+                    %small.pull-right.text-muted
+          .panel-footer
+            %input#btn-input.form-control.input-sm{"data-behavior" => "room_speaker", :type => "text"}/

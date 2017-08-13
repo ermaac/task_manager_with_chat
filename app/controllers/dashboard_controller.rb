@@ -21,7 +21,7 @@ class DashboardController < ApplicationController
     @lists = @board.lists
     @list = List.new
     @note = Note.new
-    @messages = @board.chat.messages
+    @messages = @board.chat.messages.last(10)
   end
   def create
     user_board = UserBoard.new(user_board_params)
@@ -43,8 +43,5 @@ class DashboardController < ApplicationController
     board_id = params[:board_id]
     Invitation.where(board_id: board_id, user_to_invite_id: current_user.id).first.destroy
     {user_id: current_user.id, board_id: board_id}
-  end
-
-  def session_chat_id
   end
 end

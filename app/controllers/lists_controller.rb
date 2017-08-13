@@ -7,6 +7,7 @@ class ListsController < ApplicationController
     @lists = @board.lists
     @list = List.new
     @note = Note.new
+    @messages = @board.chat.messages
   end
 
   def new
