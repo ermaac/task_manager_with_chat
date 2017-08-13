@@ -7,6 +7,8 @@ class BoardsController < ApplicationController
 
   def show
     session[:board_id] = params[:id]
+    # cookies[:board_id] = params[:id]
+    # binding.pry
     redirect_to lists_path
   end
 
@@ -14,6 +16,7 @@ class BoardsController < ApplicationController
     @board = Board.new(board_params)
     if @board.save
       UserBoard.create user: current_user, board: @board
+      Chat.create(board_id: @board.id)
       redirect_to root_path
     else
       flash[:warning] = 'Fill the form'

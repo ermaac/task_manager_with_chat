@@ -9,10 +9,13 @@ class RoomChannel < ApplicationCable::Channel
   end
 
   def speak(data)
-    Message.create(text: data['message'], user_id: User.last.id, chat_id: Chat.last.id)
+    Message.create(text: data['message'], user_id: current_user.id, chat_id: current_chat.id)
   end
 
    # def current_user
    #   @current_user ||= session[:current_user_id] && User.find_by_id(session[:current_user_id])
+   # end
+
+   # def current_chat
    # end
 end

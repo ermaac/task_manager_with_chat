@@ -6,7 +6,6 @@ class DashboardController < ApplicationController
     @board = Board.new
     @boards = current_user.boards
     @number = Invitation.where(user_to_invite_id: current_user.id).count
-    @messages = Message.all
   end
   def current_user_board
     user_boards = User.find(current_user.id).boards
@@ -17,11 +16,12 @@ class DashboardController < ApplicationController
   end
   def show
     session[:board_id] = params[:id]
+    cookies[:board_id] = params[:id]
     @board = Board.find params[:id]#fix
     @lists = @board.lists
     @list = List.new
     @note = Note.new
-    @messages = Message.all
+    @messages = @board.chat.messages
   end
   def create
     user_board = UserBoard.new(user_board_params)
@@ -34,10 +34,17 @@ class DashboardController < ApplicationController
     end
   end
 
+  def create_message
+    Message.create(text: data['message'], user_id: current_user.id, chat_id: Chat.find_by_id(session[board_id]).id)
+  end
+
   private
-  def user_board_params
+  def user_board_param
     board_id = params[:board_id]
     Invitation.where(board_id: board_id, user_to_invite_id: current_user.id).first.destroy
     {user_id: current_user.id, board_id: board_id}
+  end
+
+  def session_chat_id
   end
 end
