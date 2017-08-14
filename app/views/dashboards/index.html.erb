@@ -1,0 +1,5 @@
+<% provide(:title, 'Home') %>
+<div class="row">
+  <%= render partial: 'boards/board', collection: @boards %>
+  <%= render "boards/create_board" %>
+</div>
