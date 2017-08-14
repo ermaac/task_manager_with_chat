@@ -66,10 +66,10 @@ ActiveRecord::Schema.define(version: 20170808130934) do
     t.string "first_name"
     t.string "last_name"
     t.date "birthdate"
+    t.string "sex"
     t.string "phone"
     t.string "photo_url"
     t.bigint "user_id"
-    t.integer "sex"
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
