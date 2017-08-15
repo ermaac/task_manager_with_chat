@@ -19,11 +19,11 @@ class NotesController < ApplicationController
     redirect_to dashboard_path(params[:board_id])
   end
 
-  def update
+  def move
     @note = Note.find params[:id]
     @lists = List.where(board_id: session[:board_id])
-    @note.update(list_id: params[:list_id])
-    redirect_to lists_path
+    @note.move(list_id: params[:list_id])
+    redirect_to dashboard_path(params[:board_id])
   end 
 
   private
