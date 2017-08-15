@@ -1,6 +1,8 @@
 .container-fluid
   = render 'shared/menu_bar'
   %h1 Your lists
+  #row_for_list
   .row
     = render partial: 'lists/list', collection: @lists
     = render 'lists/list_form'
+= render 'shared/chat'
