@@ -1,7 +1,5 @@
 <% provide(:title, 'Home') %>
 <div class="row">
-  <% @boards.each do |b|%>
-    <%= render "shared/board", b: b %>
-  <% end %>
-  <%= render "shared/create_board" %>
+  <%= render partial: 'boards/board', collection: @boards %>
+  <%= render "boards/create_board" %>
 </div>

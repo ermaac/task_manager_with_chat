@@ -7,7 +7,7 @@ class DashboardsController < ApplicationController
   def index
     @board = Board.new
     @boards = current_user.boards
-    @number = Invitation.where(user_to_invite_id: current_user.id).count
+    @invitation_count = Invitation.where(user_to_invite_id: current_user.id).count
   end
 
   def show
@@ -49,6 +49,7 @@ class DashboardsController < ApplicationController
     @user_id = params[:user_id]
     board_id = params[:id]
     {user_id: @user_id, board_id: board_id}
+  end
 
   def find_board
     unless @board = current_user.boards.find_by(id: params[:id])

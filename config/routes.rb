@@ -2,10 +2,10 @@
 
 Rails.application.routes.draw do
   root 'dashboards#index'
-  get 'dashboards/:id', to: 'dashboards#show', as: :dashboard
   get 'static_pages/about'
   get 'static_pages/help'
   get 'static_pages/contact'
+  resources :dashboards
   resources :invitations
   resources :boards do
     resources :lists do
