@@ -12,5 +12,5 @@
           .col-sm-offset-2
             = form_for note, url: board_list_note_path(@board, list, note) do |f|
               .input-group.form-group
-                = f.text_area :text, class: 'form-control col-xs-9', required: true, placeholder: "List's title"
+                = f.text_area :text, class: 'form-control col-xs-9', required: true, placeholder: "List's title", autocomplete: 'off'
               = f.submit 'Update note', class: 'btn btn-primary col-xs-9'

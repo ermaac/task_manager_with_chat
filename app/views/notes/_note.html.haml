@@ -1,10 +1,12 @@
 = render 'shared/delete_confirmation', object_type: 'note', path: board_list_note_path(@board, list, note), modal_id: note.object_id
 = render 'notes/edit_note', note: note, modal_id: "#{note.object_id}", list: list
-- if !list.is_disabled
-  %a{'data-toggle': 'modal', href: "#delete_#{note.object_id}"}
-    .fa.fa-times.pull-right
-  %a{'data-toggle': 'modal', href: "#edit_#{note.object_id}"}
-    .fa.fa-pencil.pull-right
 .panel.panel-default
-  .panel-body
-    %p= simple_format(note.text)
+  - if !list.is_disabled
+    .col-md-3
+      = link_to "#delete_#{note.object_id}", 'data-toggle': 'modal' do
+        .fa.fa-times
+      = link_to "#edit_#{note.object_id}", 'data-toggle': 'modal' do
+        .fa.fa-pencil
+    %br
+  .panel-body.scrollable.note
+    %span= simple_format(note.text)

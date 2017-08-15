@@ -13,10 +13,21 @@
  *= require_tree .
  *= require_self
  */
+textarea {
+ resize: none;
+}
+.board-description{
+ height: 50px;
+}
 
- textarea {
-   resize: none;
- }
- .board-description{
-   height: 50px;
- }
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+}
+
+.scrollable {
+  overflow-y: auto;
+}
