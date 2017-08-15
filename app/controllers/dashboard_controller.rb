@@ -35,7 +35,7 @@ class DashboardController < ApplicationController
   end
 
   def create_message
-    Message.create(text: data['message'], user_id: current_user.id, chat_id: Chat.find_by_id(session[board_id]).id)
+    Message.create(text: data['message'], user_id: current_user.id, chat_id: Chat.find_by(id: id).id)
   end
 
   private
