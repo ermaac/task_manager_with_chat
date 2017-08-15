@@ -1,32 +1,13 @@
 = render 'shared/delete_confirmation', object_type: 'note', path: board_list_note_path(@board, list, note), modal_id: note.object_id
 = render 'notes/edit_note', note: note, modal_id: "#{note.object_id}", list: list
+= render 'notes/move_note', note: note, modal_id: "#{note.object_id}", list: list
 - if !list.is_disabled
   %a{'data-toggle': 'modal', href: "#delete_#{note.object_id}"}
     .fa.fa-times.pull-right
   %a{'data-toggle': 'modal', href: "#edit_#{note.object_id}"}
     .fa.fa-pencil.pull-right
-  %a{"data-target" => ".bd-example-modal-sm", "data-toggle" => "modal", :type => "button"}
+  %a{'data-toggle': 'modal', href: "#move_#{note.object_id}"}
     .fa.fa-location-arrow.pull-right
-  .modal.fade.bd-example-modal-sm{role: 'dialog', :tabindex => "-1"}
-    .modal-dialog
-      .modal-content
-        .modal-header
-          %button{type: 'button', class: 'close', 'data-dismiss': 'modal'}
-            &times;
-          .text-center
-            %h4
-              Move note to another list
-        .modal-body
-          .dropdown
-            %a.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :role => "button"}
-              .text-center
-                %p Scroll of Lists
-                %span.caret
-            %ul.dropdown-menu{"aria-labelledby" => "dLabel", :role => "menu"}
-              - @lists.each do |list|
-                %li
-                  - if(list.id != note.list_id)
-                    = link_to list.title,board_list_note_path(@board, list, note),method: :patch
 .panel.panel-default
   .panel-body
     %p= simple_format(note.text)

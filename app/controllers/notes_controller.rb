@@ -22,13 +22,14 @@ class NotesController < ApplicationController
   def move
     @note = Note.find params[:id]
     @lists = List.where(board_id: session[:board_id])
-    @note.move(list_id: params[:list_id])
+    @note.update(list_id: params[:list_id])
     redirect_to dashboard_path(params[:board_id])
-  end 
+  end
 
   private
 
   def note_params
+    #binding.pry
     params.require(:note).permit(:text)
   end
 
