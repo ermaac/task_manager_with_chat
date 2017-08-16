@@ -1,4 +1,6 @@
 class BoardsController < ApplicationController
+  authorize_resource
+
   def create
     @board = Board.new(board_params)
     @board.creator_id = current_user.id

@@ -1,4 +1,5 @@
 class NotesController < ApplicationController
+  authorize_resource
   before_action :set_current_note
   skip_before_action :set_current_note, only: :create
 
