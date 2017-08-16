@@ -1,6 +1,7 @@
 class NotesController < ApplicationController
   before_action :set_current_note
   skip_before_action :set_current_note, only: :create
+  authorize_resource
 
   def create
     @note = Note.new note_params

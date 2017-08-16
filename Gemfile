@@ -25,6 +25,7 @@ gem 'mini_magick'
 gem 'haml', '~>5.0.1'
 gem 'jquery-rails'
 gem 'pry'
+gem 'cancancan', '~> 2.0'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]

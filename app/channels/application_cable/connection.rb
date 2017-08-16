@@ -13,7 +13,8 @@ module ApplicationCable
 
     protected
     def find_verified_user
-      User.find_by_id cookies.signed['user.id'] || reject_unauthorized_connection
+      # User.find_by_id cookies.signed['user.id'] || reject_unauthorized_connection
+      env['warden'].user || reject_unauthorized_connection
     end
 
     def find_current_chat

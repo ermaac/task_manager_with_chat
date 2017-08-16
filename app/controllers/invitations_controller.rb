@@ -1,6 +1,8 @@
 class InvitationsController < ApplicationController
-  before_action :authenticate_user!
+  #before_action :authenticate_user!
   before_action :board_exist, :user_email_presence, only: :create
+  authorize_resource
+
   def index
     @invite = Invitation.where(user_to_invite_id: current_user.id)
   end

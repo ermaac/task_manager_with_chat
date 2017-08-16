@@ -1,5 +1,6 @@
 class ProfilesController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update]
+  authorize_resource
 
   def show
   end

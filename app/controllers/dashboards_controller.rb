@@ -1,6 +1,6 @@
 class DashboardsController < ApplicationController
-  before_action :authenticate_user!, only: [:index, :show]
   before_action :find_board, only: :show
+  authorize_resource class: false
 
   def index
     @board = Board.new
@@ -33,7 +33,7 @@ class DashboardsController < ApplicationController
   end
 
   private
-  
+
   def user_board_params
     board_id = params[:board_id]
     Invitation.where(board_id: board_id, user_to_invite_id: current_user.id).first.destroy

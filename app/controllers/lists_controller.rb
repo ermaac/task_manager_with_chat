@@ -4,6 +4,7 @@ class ListsController < ApplicationController
   before_action :set_current_list
   skip_before_action :set_current_list, only: :create
   before_action :check_creator_of_board, only: :switch_editability
+  authorize_resource
 
   def create
     @list = List.new list_params
