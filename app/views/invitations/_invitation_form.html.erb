@@ -2,9 +2,11 @@
   <div class="caption">
     <%= form_for("send", method: "post") do |f| %>
       <div class="form-group">
-        <%=f.text_field :board_title, class: "form-control",placeholder:"Board name",required:true %>
+        <%= f.label :choose_board %>
+        <%= f.select :board_title, current_user.boards.all.collect { |p|  p.title },{},{class: "form-control"} %>
       </div>
       <div class="form-group">
+        <%= f.label :choose_user_by_email %>
         <%= f.text_area :inviting_user, class: "form-control",size: "auto x2",placeholder:"Email",required:true %>
       </div>
       <%= f.submit "Send",class: "btn btn-success btn-block" %>
