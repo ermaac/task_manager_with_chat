@@ -29,6 +29,7 @@ group :development, :test do
   gem 'pry-nav'
   gem 'pry-rails'
   gem 'rspec-rails', '~> 3.5'
+  gem 'factory_girl_rails', '~> 4.0'
 end
 
 group :development do
@@ -40,7 +41,10 @@ group :development do
 end
 
 group :test do
-  gem 'factory_girl_rails', '~> 4.0'
+  gem 'capybara'
+  gem 'capybara-email'
+  gem 'capybara-webkit'
+  gem 'launchy'
   gem 'guard',                    '2.13.0'
   gem 'guard-minitest',           '2.4.4'
   gem 'minitest-reporters',       '1.1.14'
