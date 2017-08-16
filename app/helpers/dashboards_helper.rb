@@ -9,4 +9,10 @@ module DashboardsHelper
       link_to "Leave board", dashboard_path(user_id: user.id), method: :delete, class: "btn btn-danger"
     end
   end
+  def board_creator?(user)
+    user.id == current_user.id && @board.creator_id != user.id
+  end
+  def board_subscriber?(user)
+    @board.creator_id == user.id
+  end
 end
