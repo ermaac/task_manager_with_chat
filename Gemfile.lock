@@ -69,10 +69,9 @@ GEM
     capybara-webkit (1.1.0)
       capybara (~> 2.0, >= 2.0.2)
       json
-    carrierwave (1.1.0)
-      activemodel (>= 4.0.0)
-      activesupport (>= 4.0.0)
-      mime-types (>= 1.16)
+    climate_control (0.2.0)
+    cocaine (0.5.8)
+      climate_control (>= 0.0.3, < 1.0)
     coderay (1.1.1)
     coffee-rails (4.2.2)
       coffee-script (>= 2.2.0)
@@ -146,6 +145,7 @@ GEM
     mime-types (3.1)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2016.0521)
+    mimemagic (0.3.2)
     mini_magick (4.8.0)
     mini_mime (0.1.4)
     mini_portile2 (2.2.0)
@@ -190,6 +190,12 @@ GEM
     omniauth-vkontakte (1.4.0)
       omniauth-oauth2 (~> 1.2)
     orm_adapter (0.5.0)
+    paperclip (5.0.0)
+      activemodel (>= 4.2.0)
+      activesupport (>= 4.2.0)
+      cocaine (~> 0.5.5)
+      mime-types
+      mimemagic (~> 0.3.0)
     parallel (1.12.0)
     parser (2.4.0.0)
       ast (~> 2.2)
@@ -334,7 +340,6 @@ DEPENDENCIES
   capybara
   capybara-email
   capybara-webkit
-  carrierwave
   coffee-rails (~> 4.2)
   devise
   factory_girl_rails (~> 4.0)
@@ -352,6 +357,7 @@ DEPENDENCIES
   omniauth-github
   omniauth-google-oauth2 (~> 0.5.1)
   omniauth-vkontakte
+  paperclip (~> 5.0.0)
   pg (~> 0.18)
   pry
   pry-nav

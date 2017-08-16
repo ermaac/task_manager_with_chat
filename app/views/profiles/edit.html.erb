@@ -1,11 +1,7 @@
 <div class="authform">
   <div class="panel panel-default">
     <div class="panel-heading text-center">
-      <% if @profile.photo_url.nil? %>
-        <%= image_tag "/images/fallback/missing.png", class: "img-circle", size: "140x140" %>
-      <% else %>
-        <%= image_tag @profile.photo_url, class: "img-circle", size: "140x140" %>
-      <% end %>
+      <%= image_tag @profile.photo_url.url(:thumb), class: "img-circle", size: "140x140" %>
     </div>
     <div class="panel-body">
       <%= form_for @profile, url: profile_path, html: { multipart: true } do |f| %>

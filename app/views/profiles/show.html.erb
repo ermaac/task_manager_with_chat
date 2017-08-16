@@ -2,11 +2,7 @@
   <div class="span3 well">
       <center>
         <%= link_to edit_profile_path(current_user) do %>
-          <% if @profile.photo_url.nil? %>
-            <%= image_tag "/images/fallback/missing.png", class: "img-circle", size: "140x140" %>
-          <% else %>
-            <%= image_tag @profile.photo_url, class: "img-circle", size: "140x140" %>
-          <% end %>
+          <%= image_tag @profile.photo_url.url(:thumb), class: "img-circle", size: "140x140" %>
         <% end %>
         <h3><%= @profile.first_name %> <%= @profile.last_name %></h3>
         <%= link_to 'Edit Profile', edit_profile_path(current_user), class: "btn btn-primary" %>
