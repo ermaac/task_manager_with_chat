@@ -39,6 +39,9 @@ class DashboardsController < ApplicationController
     end
   end
 
+  def create_message
+    Message.create(text: data['message'], user_id: current_user.id, chat_id: Chat.find_by(id: id).id)
+  end
 
   private
 
@@ -61,8 +64,5 @@ class DashboardsController < ApplicationController
     end
   end
 
-  def create_message
-    Message.create(text: data['message'], user_id: current_user.id, chat_id: Chat.find_by(id: id).id)
-  end
 
 end

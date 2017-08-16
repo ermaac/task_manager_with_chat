@@ -6,9 +6,6 @@ class InvitationsController < ApplicationController
     @invite = Invitation.where(user_to_invite_id: current_user.id)
   end
 
-  def new
-  end
-
   def create
     @invitation = Invitation.new(prepare_params)
     if @invitation.save

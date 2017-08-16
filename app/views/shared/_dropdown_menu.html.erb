@@ -4,12 +4,12 @@
   <ul class="dropdown-menu">
     <% @board.users.each do |user| %>
       <li>
-        <% if user.id == current_user.id && @board.creator_id != user.id%>
-          <a href="#user<%= user.id %>" role="button" class="btn btn-success" data-toggle="modal" ><%= "#{user.profile.first_name}"+' '+"#{user.profile.last_name}" %></a>
-        <% elsif @board.creator_id == user.id %>
-          <a href="#user<%= user.id %>" role="button" class="btn btn-danger" data-toggle="modal" ><%= "#{user.profile.first_name}"+' '+"#{user.profile.last_name}" %></a>
+        <% if board_creator?(user)%>
+          <%= link_to "#{user.profile.first_name}"+' '+"#{user.profile.last_name}", "#user#{user.id}",{class:"btn btn-success",'data-toggle': "modal"}%>
+        <% elsif board_subscriber?(user)  %>
+          <%= link_to "#{user.profile.first_name}"+' '+"#{user.profile.last_name}", "#user#{user.id}",{class:"btn btn-danger",'data-toggle': "modal"}%>
         <% else %>
-          <a href="#user<%= user.id %>" role="button" class="btn btn-info" data-toggle="modal" ><%= "#{user.profile.first_name}"+' '+"#{user.profile.last_name}" %></a>
+          <%= link_to "#{user.profile.first_name}"+' '+"#{user.profile.last_name}", "#user#{user.id}",{class:"btn btn-info",'data-toggle': "modal"}%>
         <% end %>
       </li>
     <% end %>
