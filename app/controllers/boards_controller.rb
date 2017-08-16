@@ -4,6 +4,7 @@ class BoardsController < ApplicationController
     @board.creator_id = current_user.id
     if @board.save
       UserBoard.create user: current_user, board: @board
+      Chat.create(board_id: @board.id)
     else
       flash[:warning] = 'Fill the form'
     end
