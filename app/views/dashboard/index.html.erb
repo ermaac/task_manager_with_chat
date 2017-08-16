@@ -1,7 +1,0 @@
-<% provide(:title, 'Home') %>
-<div class="row">
-  <% @boards.each do |b|%>
-    <%= render "shared/board", b: b %>
-  <% end %>
-  <%= render "shared/create_board" %>
-</div>
