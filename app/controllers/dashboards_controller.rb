@@ -13,6 +13,8 @@ class DashboardsController < ApplicationController
     @list = List.new
     @note = Note.new
     @is_creator = @board.creator_id == current_user.id
+    cookies[:board_id] = params[:id]
+    @messages = @board.chat.messages.last(10)
   end
 
   def create
@@ -26,8 +28,12 @@ class DashboardsController < ApplicationController
     end
   end
 
-  private
+  def create_message
+    Message.create(text: data['message'], user_id: current_user.id, chat_id: Chat.find_by(id: id).id)
+  end
 
+  private
+  
   def user_board_params
     board_id = params[:board_id]
     Invitation.where(board_id: board_id, user_to_invite_id: current_user.id).first.destroy
