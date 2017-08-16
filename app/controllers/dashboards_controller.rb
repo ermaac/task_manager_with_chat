@@ -2,6 +2,8 @@ class DashboardsController < ApplicationController
   before_action :authenticate_user!, only: [:index, :show]
   before_action :find_board, only: :show
 
+  helper DashboardHelper
+
   def index
     @board = Board.new
     @boards = current_user.boards
@@ -14,7 +16,7 @@ class DashboardsController < ApplicationController
     @note = Note.new
     @is_creator = @board.creator_id == current_user.id
     cookies[:board_id] = params[:id]
-    @messages = @board.chat.messages.last(10)
+    @messages = @board.chat.messages.last(100)
   end
 
   def create
@@ -22,7 +24,7 @@ class DashboardsController < ApplicationController
 
     if user_board.save
       redirect_to root_path
-      flash[:success] = "You successfully connect to board "
+      flash[:success] = "You have successfully joined to board "
     else
       redirect_to invitations_path
     end
@@ -33,7 +35,7 @@ class DashboardsController < ApplicationController
   end
 
   private
-  
+
   def user_board_params
     board_id = params[:board_id]
     Invitation.where(board_id: board_id, user_to_invite_id: current_user.id).first.destroy

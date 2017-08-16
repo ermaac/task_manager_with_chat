@@ -7,12 +7,16 @@ App.room = App.cable.subscriptions.create "RoomChannel",
 
   received: (data) ->
     $('#messages').append data['message']
+    chat = $('.chat')
+    height = chat[0].scrollHeight
+    chat.scrollTop height
+
 
   speak: (message) ->
     @perform 'speak', message: message
 
 $(document).on 'keypress', '[data-behavior~=room_speaker]', (event) ->
-  if event.keyCode is 13 # return = send 
-    App.room.speak event.target.value 
-    event.target.value = '' 
+  if event.keyCode is 13 # return = send
+    App.room.speak event.target.value
+    event.target.value = ''
     event.preventDefault()

@@ -31,15 +31,3 @@ body {
 .scrollable {
   overflow-y: auto;
 }
-
-#block_for_chat {
-  color: red;
-  float:right;
-  margin-right: -680px;
-  position: relative;
-  margin-top: -100px;
-}
-
-#row_for_chat {
-  margin-right: 500px;
-}

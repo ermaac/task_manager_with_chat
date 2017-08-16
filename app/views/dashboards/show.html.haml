@@ -3,5 +3,7 @@
   .lists-area.col-md-9
     = render partial: 'lists/list', collection: @lists
   .chat-area.col-md-3
-    = render 'lists/list_form'
-    = render 'shared/chat'
+    .row
+      = render 'lists/list_form'
+    .row
+      = render 'shared/chat'
