@@ -9,3 +9,4 @@
 profile = Profile.create(first_name:"igor",last_name:"sioef",user_id:1)
 profile = Profile.create(first_name:"mike",last_name:"lol",user_id:2)
 profile = Profile.create(first_name:"Jon",last_name:"Snow",user_id:3)
+AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
