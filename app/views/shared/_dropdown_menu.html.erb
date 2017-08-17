@@ -1,17 +1,19 @@
-<div class="dropdown">
-  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Joined users
+<%= link_to "#", 'data-toggle': 'dropdown' do %>
+  <div class="btn btn-primary dropdown-toggle" >
+    Joined users
     <span class="caret"></span></button>
-  <ul class="dropdown-menu">
-    <% @board.users.each do |user| %>
-      <li>
-        <% if board_creator?(user)%>
-          <%= link_to "#{user.profile.first_name}"+' '+"#{user.profile.last_name}", "#user#{user.id}",{class:"btn btn-success",'data-toggle': "modal"}%>
-        <% elsif board_subscriber?(user)  %>
-          <%= link_to "#{user.profile.first_name}"+' '+"#{user.profile.last_name}", "#user#{user.id}",{class:"btn btn-danger",'data-toggle': "modal"}%>
-        <% else %>
-          <%= link_to "#{user.profile.first_name}"+' '+"#{user.profile.last_name}", "#user#{user.id}",{class:"btn btn-info",'data-toggle': "modal"}%>
-        <% end %>
-      </li>
-    <% end %>
-  </ul>
-</div>
+  </div>
+<% end %>
+<ul class="dropdown-menu">
+  <% @board.users.each do |user| %>
+    <li>
+      <% if board_subscriber?(user)%>
+        <%= link_to "#{user.profile.first_name}"+' '+"#{user.profile.last_name}", "#user#{user.id}",{class:"btn btn-success",'data-toggle': "modal"}%>
+      <% elsif board_creator?(user)  %>
+        <%= link_to "#{user.profile.first_name}"+' '+"#{user.profile.last_name}", "#user#{user.id}",{class:"btn btn-danger",'data-toggle': "modal"}%>
+      <% else %>
+        <%= link_to "#{user.profile.first_name}"+' '+"#{user.profile.last_name}", "#user#{user.id}",{class:"btn btn-info",'data-toggle': "modal"}%>
+      <% end %>
+    </li>
+  <% end %>
+</ul>

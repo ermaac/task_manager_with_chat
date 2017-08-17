@@ -11,11 +11,11 @@ module DashboardsHelper
     end
   end
 
-  def board_creator?(user)
+  def board_subscriber?(user)
     user.id == current_user.id && @board.creator_id != user.id
   end
 
-  def board_subscriber?(user)
+  def board_creator?(user)
     @board.creator_id == user.id
   end
 
