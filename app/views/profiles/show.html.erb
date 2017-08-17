@@ -2,7 +2,7 @@
   <div class="span3 well">
       <center>
         <%= link_to edit_profile_path(current_user) do %>
-          <%= image_tag @profile.photo_url.url(:thumb), class: "img-circle", size: "140x140" %>
+          <%= image_tag @profile.avatar.url(:thumb), class: "img-circle", size: "140x140" %>
         <% end %>
         <h3><%= @profile.first_name %> <%= @profile.last_name %></h3>
         <%= link_to 'Edit Profile', edit_profile_path(current_user), class: "btn btn-primary" %>

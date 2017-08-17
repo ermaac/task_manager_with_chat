@@ -10,11 +10,11 @@ class ProfilesController < ApplicationController
   def update
     if @profile.update(profile_params)
       flash[:success] = "Profile updated"
-      redirect_to @profile
     else
       flash[:error] = @profile.errors.full_messages.join('\n')
-      redirect_to @profile
+      render :edit
     end
+    redirect_to @profile
   end
 
   private
@@ -29,7 +29,7 @@ class ProfilesController < ApplicationController
                                     :birthdate,
                                     :sex,
                                     :phone,
-                                    :photo_url)
+                                    :avatar)
   end
 end
 
