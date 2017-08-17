@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   end
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
   post 'user_boards', to: 'dashboards#create', as: 'user_boards'
+  patch '/boards/:board_id/lists/:list_id/notes/:id/move', to: 'notes#move', as: :move
   put '/boards/:board_id/lists/:id/switch_editability', to: 'lists#switch_editability', as: :switch_list_editability
   mount ActionCable.server => '/cable'
 end
