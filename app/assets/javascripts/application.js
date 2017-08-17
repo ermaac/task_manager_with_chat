@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require cable
 //= require rails-ujs
+//= require jquery
 //= require_tree .
 window.setTimeout(function() {
   $(".alert").fadeTo(4500, 0).slideUp(500, function(){

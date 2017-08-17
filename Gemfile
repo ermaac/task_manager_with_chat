@@ -20,6 +20,9 @@ gem 'sass-rails', '~> 5.0'
 gem 'turbolinks', '~> 5'
 gem 'uglifier', '>= 1.3.0'
 gem 'webpacker', '~> 2.0'
+# gem 'carrierwave'
+gem 'mini_magick'
+gem "paperclip", "~> 5.0.0"
 gem 'haml', '~>5.0.1'
 gem 'jquery-rails'
 gem 'pry'
@@ -29,6 +32,7 @@ group :development, :test do
   gem 'pry-nav'
   gem 'pry-rails'
   gem 'rspec-rails', '~> 3.5'
+  gem 'factory_girl_rails', '~> 4.0'
 end
 
 group :development do
@@ -40,7 +44,10 @@ group :development do
 end
 
 group :test do
-  gem 'factory_girl_rails', '~> 4.0'
+  gem 'capybara'
+  gem 'capybara-email'
+  gem 'capybara-webkit'
+  gem 'launchy'
   gem 'guard',                    '2.13.0'
   gem 'guard-minitest',           '2.4.4'
   gem 'minitest-reporters',       '1.1.14'
