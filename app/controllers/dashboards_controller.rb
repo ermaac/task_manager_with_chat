@@ -16,14 +16,15 @@ class DashboardsController < ApplicationController
     @note = Note.new
     @is_creator = @board.creator_id == current_user.id
     cookies[:board_id] = params[:id]
-    @messages = @board.chat.messages.last(10)
+    @messages = @board.chat.messages.last(100)
+    @invitation_count = Invitation.where(user_to_invite_id: current_user.id).count
   end
 
   def create
     user_board = UserBoard.new(user_board_params)
     if user_board.save
       redirect_to root_path
-      flash[:success] = "You successfully connect to board "
+      flash[:success] = "You have successfully joined to board "
     else
       redirect_to invitations_path
     end
@@ -63,6 +64,4 @@ class DashboardsController < ApplicationController
       redirect_to root_path
     end
   end
-
-
 end

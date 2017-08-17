@@ -1,5 +1,5 @@
 .modal.fade.bs-example-modal-sm{role: 'dialog', id: "edit_#{modal_id}"}
-  .modal-dialog.modal-sm
+  .modal-dialog
     .modal-content
       .modal-header
         %button{type: 'button', class: 'close', 'data-dismiss': 'modal'}
@@ -12,5 +12,5 @@
           .col-sm-offset-2
             = form_for note, url: board_list_note_path(@board, list, note) do |f|
               .input-group.form-group
-                = f.text_area :text, class: 'form-control col-xs-9', required: true, placeholder: "List's title"
+                = f.text_area :text, class: 'form-control col-xs-9', required: true, placeholder: "List's title", autocomplete: 'off', cols: 40, rows: 4
               = f.submit 'Update note', class: 'btn btn-primary col-xs-9'

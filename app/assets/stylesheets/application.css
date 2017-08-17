@@ -13,23 +13,25 @@
  *= require_tree .
  *= require_self
  */
-
- textarea {
-   resize: none;
- }
- .board-description{
-   height: 50px;
- }
-
-#block_for_chat {
-  color: red;
-  float:right;
-  margin-right: -680px;
-  position: relative; 
-  margin-top: -100px;
+textarea {
+ resize: none;
+}
+.board-description{
+ height: 50px;
 }
 
-#row_for_chat {
-  margin-right: 500px;
+html {
+  height: 100%;
 }
 
+body {
+  height: 100%;
+}
+
+.scrollable {
+  overflow-y: auto;
+}
+
+.flash-messages{
+  width: 20vw;
+}
