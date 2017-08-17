@@ -31,3 +31,7 @@ body {
 .scrollable {
   overflow-y: auto;
 }
+
+.flash-messages{
+  width: 20vw;
+}

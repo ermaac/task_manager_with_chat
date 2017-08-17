@@ -17,6 +17,7 @@ class DashboardsController < ApplicationController
     @is_creator = @board.creator_id == current_user.id
     cookies[:board_id] = params[:id]
     @messages = @board.chat.messages.last(100)
+    @invitation_count = Invitation.where(user_to_invite_id: current_user.id).count
   end
 
   def create

@@ -8,7 +8,7 @@
       - else
         = link_to list.title, "#update_#{list.object_id}", 'data-toggle': 'modal'
       - unless list.is_disabled
-        = link_to "#delete_#{list.object_id}" do
+        = link_to "#delete_#{list.object_id}", 'data-toggle': 'modal' do
           .fa.fa-times.pull-right
       - if @is_creator
         = link_to switch_list_editability_path(@board, list), 'data-method': 'put' do
