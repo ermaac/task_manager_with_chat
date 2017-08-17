@@ -9,12 +9,17 @@ class DashboardsController < ApplicationController
   end
 
   def show
-    @lists = @board.lists.includes(:notes).order('created_at asc')
-    @list = List.new
-    @note = Note.new
-    @is_creator = @board.creator_id == current_user.id
-    cookies[:board_id] = params[:id]
-    @messages = @board.chat.messages.last(10)
+    if current_user.profile.first_name
+      @lists = @board.lists.includes(:notes).order('created_at asc')
+      @list = List.new
+      @note = Note.new
+      @is_creator = @board.creator_id == current_user.id
+      cookies[:board_id] = params[:id]
+      @messages = @board.chat.messages.last(10)
+    else
+      redirect_to edit_profile_path(current_user.id)
+      flash[:notice] = "First name and Last name can't be blank"
+    end
   end
 
   def create
@@ -33,7 +38,7 @@ class DashboardsController < ApplicationController
   end
 
   private
-  
+
   def user_board_params
     board_id = params[:board_id]
     Invitation.where(board_id: board_id, user_to_invite_id: current_user.id).first.destroy

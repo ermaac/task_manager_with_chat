@@ -12,7 +12,8 @@ Rails.application.routes.draw do
       resources :notes
     end
   end
-  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks',
+                                    registrations: 'registrations' }
   resources :profiles, only: [:show, :update, :edit]
   delete 'invitings', to: 'invitings#destroy'
   post 'user_boards', to: 'dashboards#create', as: 'user_boards'

@@ -10,7 +10,7 @@
             <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
           </span>
           <%= f.text_field :first_name, {
-            class: "form-control", placeholder: "First Name", autofocus: true
+            class: "form-control", id: 'first_name', placeholder: "First Name", autofocus: true
           }%>
         </div>
         <div class="input-group form-group">
@@ -18,7 +18,7 @@
             <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
           </span>
           <%= f.text_field :last_name, {
-            class: "form-control", placeholder: "Last Name", autocomplete: "off"
+            class: "form-control", id: 'last_name', placeholder: "Last Name", autocomplete: "off"
           }%>
         </div>
         <div class="input-group form-group">
