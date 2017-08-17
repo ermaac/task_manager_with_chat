@@ -5,4 +5,6 @@
   .row
     = render partial: 'lists/list', collection: @lists
     = render 'lists/list_form'
+    -@board.users.each do |user|
+      =render 'shared/dropdown_for_users', user: user
 = render 'shared/chat'
