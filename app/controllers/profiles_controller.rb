@@ -12,7 +12,7 @@ class ProfilesController < ApplicationController
       flash[:success] = "Profile updated"
       redirect_to @profile
     else
-      flash[:danger] = @profile.errors.full_messages.join('<br>')
+      flash.now[:danger] = @profile.errors.full_messages.join('<br>')
       render :edit
     end
   end

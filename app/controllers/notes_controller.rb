@@ -1,6 +1,7 @@
 class NotesController < ApplicationController
   before_action :set_current_note
   skip_before_action :set_current_note, only: :create
+  before_action :list_enabled?
 
   def create
     @note = Note.new note_params
@@ -33,6 +34,14 @@ class NotesController < ApplicationController
   end
 
   def set_current_note
-    @note = Note.find params[:id]
+    @note = Note.find_by id: params[:id]
+    redirect_to dashboard_path(params[:board_id]), flash: {warning: 'Note not found'} unless @note
   end
+
+  def list_enabled?
+    list = @note ? @note.list : List.find(params[:list_id])
+    board = list.board
+    redirect_to dashboard_path(params[:board_id]), flash: {warning: "List is disabled!"} if list.is_disabled && current_user.id != board.creator_id
+  end
+
 end
