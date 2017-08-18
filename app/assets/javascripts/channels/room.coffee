@@ -20,3 +20,5 @@ $(document).on 'keypress', '[data-behavior~=room_speaker]', (event) ->
     App.room.speak event.target.value
     event.target.value = ''
     event.preventDefault()
+$('#create-list').on 'click', ->
+  alert 'List created'
