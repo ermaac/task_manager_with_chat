@@ -1,20 +1,4 @@
-= render 'shared/delete_confirmation', object_type: 'list', path: board_list_path(@board, list), modal_id: list.object_id
-= render 'lists/edit_list', modal_id: list.object_id, list: list
-.col-md-3
-  .panel.panel-default.list-panel
-    .panel-heading
-      - if list.is_disabled
-        = list.title
-      - else
-        = link_to list.title, "#update_#{list.object_id}", 'data-toggle': 'modal'
-      - unless list.is_disabled
-        = link_to "#delete_#{list.object_id}", 'data-toggle': 'modal' do
-          .fa.fa-times.pull-right
-      - if @is_creator
-        = link_to switch_list_editability_path(@board, list), 'data-method': 'put' do
-          .fa.fa-ban.pull-right
-    .panel-body
-      .list.scrollable
-        = render partial: 'notes/note', collection: list.notes.order('created_at asc'), locals: {list: list}
-      - unless list.is_disabled
-        = render 'notes/note_form', list: list
+%div{id: "list_#{list.id}"}
+  = render 'shared/delete_confirmation', object_type: 'list', path: board_list_path(@board, list), modal_id: "list_#{list.id}"
+  = render 'lists/edit_list', modal_id: list.id, list: list
+  = render 'lists/list_panel', list: list

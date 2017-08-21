@@ -17,7 +17,7 @@ class DashboardsController < ApplicationController
       @note = Note.new
       @is_creator = @board.creator_id == current_user.id
       cookies[:board_id] = params[:id]
-      @messages = @board.chat.messages.last(10)
+      @messages = @board.chat.messages.last(50)
     else
       redirect_to edit_profile_path(current_user.id)
       flash[:danger] = "First name and Last name can't be blank"

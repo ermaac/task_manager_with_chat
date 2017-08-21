@@ -5,12 +5,14 @@ App.room = App.cable.subscriptions.create "RoomChannel",
   disconnected: ->
     # Called when the subscription has been terminated by the server
 
-  received: (data) ->
-    $('#messages').append data['message']
+  scroll_down_chat: ->
     chat = $('.chat')
     height = chat[0].scrollHeight
     chat.scrollTop height
 
+  received: (data) ->
+    $('#messages').append data['message']
+    @scroll_down_chat()
 
   speak: (message) ->
     @perform 'speak', message: message
@@ -20,5 +22,3 @@ $(document).on 'keypress', '[data-behavior~=room_speaker]', (event) ->
     App.room.speak event.target.value
     event.target.value = ''
     event.preventDefault()
-$('#create-list').on 'click', ->
-  alert 'List created'

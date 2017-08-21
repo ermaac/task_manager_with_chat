@@ -11,13 +11,21 @@ class NotesController < ApplicationController
   end
 
   def destroy
-    flash[:error] = "Error destroying note" unless @note.destroy
-    redirect_to dashboard_path(params[:board_id])
+    if @note.destroy
+      ActionCable.server.broadcast 'notes_channel', action: 'destroy', info: {id: "note_#{@note.id}"}
+    else
+      flash[:error] = "Error destroying note"
+    end
+    # redirect_to dashboard_path(params[:board_id])
   end
 
   def update
-    flash[:error] = "Error updating note" unless @note.update note_params
-    redirect_to dashboard_path(params[:board_id])
+    if @note.update note_params
+      ActionCable.server.broadcast 'notes_channel', action: 'update', info: {text: @note.text, id: "note_#{@note.id}"}
+    else
+      flash[:error] = "Error updating note"
+    end
+    # redirect_to dashboard_path(params[:board_id])
   end
 
   def move
