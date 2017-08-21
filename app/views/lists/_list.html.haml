@@ -14,5 +14,6 @@
       - if @is_creator
         %a.fa.fa-ban.pull-right{href: switch_list_editability_path(@board, list), 'data-method': 'put'}
     .panel-body
-      = render partial: 'notes/note', collection: list.notes.order('created_at asc'), locals: {list: list}
+      %div{id: "list_#{list.id}"}
+        = render partial: 'notes/note', collection: list.notes.order('created_at asc'), locals: {list: list}
       = render 'notes/note_form', list: list
