@@ -28,10 +28,10 @@
             </a>
             <ul class="dropdown-menu">
               <li>
-                <a href="#">
+                <%= link_to profile_path(current_user) do %>
                   <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                   <span> Profile</span>
-                </a>
+                <% end %>
               </li>
               <li>
                 <a href="<%= invitations_path %>">

@@ -3,13 +3,12 @@
 = render 'notes/move_note', note: note, modal_id: "#{note.object_id}", list: list
 .panel.panel-default
   - if !list.is_disabled
-    .col-md-3
+    .col-md-12
       = link_to "#delete_#{note.object_id}", 'data-toggle': 'modal' do
         .fa.fa-times
       = link_to "#edit_#{note.object_id}", 'data-toggle': 'modal' do
         .fa.fa-pencil
       = link_to "#move_#{note.object_id}", 'data-toggle': 'modal' do
         .fa.fa-location-arrow
-    %br
   .panel-body.scrollable.note
     %span= simple_format(note.text)
