@@ -22,6 +22,9 @@
             <% end %>
           </li>
         <% else %>
+          <li id="notification">
+            <a class="glyphicon glyphicon-bell" href="#"></a>
+          </li>
           <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
               <%= current_user.email %> <span class="caret"></span>

@@ -13,5 +13,5 @@
       .modal-footer
         .btn.btn-success{'data-dismiss': 'modal'}
           Cancel
-        %a.btn.btn-danger{href: path, 'data-method': 'delete'}
+        %a.btn.btn-danger{href: path, 'data-method': 'delete','data-dismiss':'modal', remote: 'true', rel: 'nofollow'}
           Confirm

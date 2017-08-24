@@ -7,8 +7,8 @@ class User < ApplicationRecord
   }.freeze
 
   after_create :create_profile
-  has_many :users_to_invite, class_name: 'Inviting', foreign_key: "invitor_id"
-  has_many :invitors, class_name: 'Inviting', foreign_key: "user_to_invite_id"
+  has_many :users_to_invite, class_name: 'Invitation', foreign_key: "invitor_id"
+  has_many :invitors, class_name: 'Invitation', foreign_key: "user_to_invite_id"
   has_many :user_boards, dependent: :destroy
   has_many :boards, through: :user_boards, dependent: :destroy
   has_many :messages, dependent: :destroy

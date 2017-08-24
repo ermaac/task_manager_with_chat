@@ -12,9 +12,9 @@
           .text-center
             .btn-group
               %a{class: 'btn dropdown-toggle', 'data-toggle': 'dropdown', href:'#'}
-                %p Choose list 
+                %p Choose list
               %ul.dropdown-menu
                 - @lists.each do |list|
                   %li
                     - if(list.id != note.list_id)
-                      = link_to list.title,move_path(@board, list, note),method: :patch
+                      = link_to list.title,move_path(@board, list, note),method: :patch, remote: true

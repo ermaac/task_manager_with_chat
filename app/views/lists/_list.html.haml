@@ -15,6 +15,7 @@
           .fa.fa-ban.pull-right
     .panel-body
       .list.scrollable
-        = render partial: 'notes/note', collection: list.notes.order('created_at asc'), locals: {list: list}
+        %div{id: "list_#{list.id}"}
+          = render partial: 'notes/note', collection: list.notes.order('created_at asc'), locals: {list: list}
       - unless list.is_disabled
         = render 'notes/note_form', list: list
