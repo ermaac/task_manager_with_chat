@@ -1,0 +1,21 @@
+#block_for_chat {
+  height: 72vh;
+}
+
+.chat {
+  height: 59vh;
+}
+
+#messages {
+  height: 100%;
+}
+
+p {
+  word-wrap: break-word;
+  color: gray;
+}
+
+.message-author {
+  font-style: italic;
+  color: black;
+}

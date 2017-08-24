@@ -1,19 +1,21 @@
 = render 'shared/delete_confirmation', object_type: 'list', path: board_list_path(@board, list), modal_id: list.object_id
 = render 'lists/edit_list', modal_id: list.object_id, list: list
-- list_is_disabled = list.is_disabled
-.col.col-md-2
-  .panel.panel-default
+.col-md-3
+  .panel.panel-default.list-panel
     .panel-heading
-      - if list_is_disabled
+      - if list.is_disabled
         = list.title
       - else
-        %a{href: "#update_#{list.object_id}", 'data-toggle': 'modal'}
-          = list.title
-      - if !list_is_disabled
-        %a.fa.fa-times.pull-right{'data-toggle': 'modal', href: "#delete_#{list.object_id}"}
+        = link_to list.title, "#update_#{list.object_id}", 'data-toggle': 'modal'
+      - unless list.is_disabled
+        = link_to "#delete_#{list.object_id}", 'data-toggle': 'modal' do
+          .fa.fa-times.pull-right
       - if @is_creator
-        %a.fa.fa-ban.pull-right{href: switch_list_editability_path(@board, list), 'data-method': 'put'}
+        = link_to switch_list_editability_path(@board, list), 'data-method': 'put' do
+          .fa.fa-ban.pull-right
     .panel-body
-      %div{id: "list_#{list.id}"}
-        = render partial: 'notes/note', collection: list.notes.order('created_at asc'), locals: {list: list}
-      = render 'notes/note_form', list: list
+      .list.scrollable
+        %div{id: "list_#{list.id}"}
+          = render partial: 'notes/note', collection: list.notes.order('created_at asc'), locals: {list: list}
+      - unless list.is_disabled
+        = render 'notes/note_form', list: list

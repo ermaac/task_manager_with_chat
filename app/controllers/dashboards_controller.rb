@@ -11,19 +11,24 @@ class DashboardsController < ApplicationController
   end
 
   def show
-    @lists = @board.lists.includes(:notes).order('created_at asc')
-    @list = List.new
-    @note = Note.new
-    @is_creator = @board.creator_id == current_user.id
-    cookies[:board_id] = params[:id]
-    @messages = @board.chat.messages.last(10)
+    if current_user.profile.first_name
+      @lists = @board.lists.includes(:notes).order('created_at asc')
+      @list = List.new
+      @note = Note.new
+      @is_creator = @board.creator_id == current_user.id
+      cookies[:board_id] = params[:id]
+      @messages = @board.chat.messages.last(10)
+    else
+      redirect_to edit_profile_path(current_user.id)
+      flash[:danger] = "First name and Last name can't be blank"
+    end
   end
 
   def create
     user_board = UserBoard.new(user_board_params)
     if user_board.save
       redirect_to root_path
-      flash[:success] = "You successfully connect to board "
+      flash[:success] = "You have successfully joined to board "
     else
       redirect_to invitations_path
     end
@@ -63,6 +68,4 @@ class DashboardsController < ApplicationController
       redirect_to root_path
     end
   end
-
-
 end
