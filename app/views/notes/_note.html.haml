@@ -3,12 +3,19 @@
 = render 'notes/move_note', note: note, modal_id: "#{note.object_id}", list: list
 .panel.panel-default{id: "note_#{note.id}"}
   - if !list.is_disabled
-    .col-md-12
-      = link_to "#delete_#{note.object_id}", 'data-toggle': 'modal' do
-        .fa.fa-times
-      = link_to "#edit_#{note.object_id}", 'data-toggle': 'modal' do
-        .fa.fa-pencil
-      = link_to "#move_#{note.object_id}", 'data-toggle': 'modal' do
-        .fa.fa-location-arrow
+    .col-sm-12
+      .dropdown.pull-right
+        %a.dropdown-toggle{'data-toggle'=> 'dropdown', role: 'button', 'aria-haspopup'=>'true', 'aria-expanded'=>'false'}
+          .glyphicon.glyphicon-menu-hamburger.note_icon
+        %ul{class: 'dropdown-menu', role: 'menu', id: "note_menu"}
+          %li
+            = link_to "#delete_#{note.object_id}", 'data-toggle': 'modal',title: "delete note" do
+              .fa.fa-times
+          %li
+            = link_to "#edit_#{note.object_id}", 'data-toggle': 'modal', title: "edit note" do
+              .fa.fa-pencil
+          %li
+            = link_to "#move_#{note.object_id}", 'data-toggle': 'modal', title: "move note" do
+              .fa.fa-location-arrow
   .panel-body.scrollable.note
     %span.content_for_update= simple_format(note.text)
