@@ -1,5 +1,5 @@
-.modal.fade.bs-example-modal-sm{role: 'dialog', id: "move_#{modal_id}"}
-  .modal-dialog
+.modal.fade.bd-example-modal-sm{role: 'dialog', id: "move_#{modal_id}"}
+  .modal-dialog.modal-sm
     .modal-content
       .modal-header
         %button{type: 'button', class: 'close', 'data-dismiss': 'modal'}
@@ -9,12 +9,12 @@
             Move note to another list
       .modal-body
         .dropdown
-          %a.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :role => "button"}
-            .text-center
-              %p Choose target list
-              %span.caret
-          %ul.dropdown-menu{"aria-labelledby" => "dLabel", :role => "menu"}
-            - @lists.each do |list|
-              %li
-                - if(list.id != note.list_id)
-                  = link_to list.title,move_path(@board, list, note),method: :patch, remote: true
+          .text-center
+            .btn-group
+              %a{class: 'btn dropdown-toggle', 'data-toggle': 'dropdown', href:'#'}
+                %p Choose list
+              %ul.dropdown-menu
+                - @lists.each do |list|
+                  %li
+                    - if(list.id != note.list_id)
+                      = link_to list.title,move_path(@board, list, note),method: :patch, remote: true
