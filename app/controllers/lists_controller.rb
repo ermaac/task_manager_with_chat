@@ -62,9 +62,10 @@ class ListsController < ApplicationController
 
   def select_allowed_actions(freeze, delete)
     actions = []
-    actions << freeze if @board.creator_id == current_user.id
-    actions << delete if @board.creator_id == current_user.id || !@list.is_disabled
-    actions
+    actions.tap do |x|
+    x << freeze if @board.creator_id == current_user.id
+    x << delete if @board.creator_id == current_user.id || !@list.is_disabled
+    end
   end
 
   def list_params
