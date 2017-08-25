@@ -1,5 +1,5 @@
 .col-md-12
-  = form_for @list, url: board_lists_path(@board, @list) do |f|
+  = form_for @list, remote: true, url: board_lists_path(@board, @list) do |f|
     .form-group
-      = f.text_field :title, class: 'form-control', required: true, placeholder: "List's title", autocomplete: 'off'
+      = f.text_field :title, class: 'form-control', required: true, placeholder: "List's title", autocomplete: 'off', id: "new_list_title"
       = f.submit @form_name, class: 'btn btn-success btn-block', id: 'create-list'
