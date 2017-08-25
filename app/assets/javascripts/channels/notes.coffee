@@ -1,4 +1,7 @@
-App.notes = App.cable.subscriptions.create "NotesChannel",
+getBoardId = () ->
+  window.location.pathname.split('/')[2]
+
+App.notes = App.cable.subscriptions.create channel: "NotesChannel", room: getBoardId(),
   connected: ->
     # Called when the subscription is ready for use on the server
 
