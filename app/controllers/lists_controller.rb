@@ -5,7 +5,7 @@ class ListsController < ApplicationController
   skip_before_action :set_current_list, only: :create
   before_action :check_creator_of_board, only: :switch_editability
   before_action :list_enabled?
-  skip_before_action :list_enabled?, only: [:create, :allowed_actions]
+  skip_before_action :list_enabled?, only: %i(create allowed_actions)
 
   respond_to :html, :js
 
@@ -15,18 +15,18 @@ class ListsController < ApplicationController
     @note = Note.new
     @is_creator = current_user.id == @board.creator_id
     if @list.save
-      list = render_to_string 'lists/_list', layout: false, locals: {list: @list}
-      ActionCable.server.broadcast 'lists_channel', action: 'create', info: {list: list, id: @list.id}
+      list = render_to_string 'lists/_list', layout: false, locals: { list: @list }
+      ActionCable.server.broadcast 'lists_channel', action: 'create', info: { list: list, id: @list.id }
     else
-      redirect_to dashboards_path(params[:board_id]), flash: {error: "An error ocured while creating list"}
+      redirect_to dashboards_path(params[:board_id]), flash: { error: 'An error ocured while creating list' }
     end
   end
 
   def update
     if @list.update list_params
-      ActionCable.server.broadcast 'lists_channel', action: 'update', info: {list_id: @list.id, title: @list.title}
+      ActionCable.server.broadcast 'lists_channel', action: 'update', info: { list_id: @list.id, title: @list.title }
     else
-      flash[:error] = "An error ocured while updating list"
+      flash[:error] = 'An error ocured while updating list'
     end
   end
 
@@ -36,36 +36,34 @@ class ListsController < ApplicationController
     @note = Note.new
     @is_creator = current_user.id == @board.creator_id
     @lists = List.where board_id: params[:board_id]
-    if @list.save
-      list = render_to_string 'lists/_list_panel', layout: false, locals: {list: @list}
-      ActionCable.server.broadcast 'lists_channel', action: 'switch_list_editability', info: {id: @list.id, list: list}
-    end
+    return unless @list.save
+    list = render_to_string 'lists/_list_panel', layout: false, locals: { list: @list }
+    ActionCable.server.broadcast 'lists_channel', action: 'switch_list_editability', info: { id: @list.id, list: list }
   end
 
   def destroy
     @list.destroy
-    ActionCable.server.broadcast "lists_channel", action: 'destroy', info: {id: @list.id}
+    ActionCable.server.broadcast 'lists_channel', action: 'destroy', info: { id: @list.id }
   end
 
   def allowed_actions
-    actions = get_actions
+    @board = @list.board
+    Struct.new 'Actions', :hint, :icon_class, :method, :link_path, :data_toggle
+    freeze = Struct::Actions.new 'freeze', 'fa fa-ban', :put, switch_list_editability_path(@board, @list), nil
+    freeze.hint = 'unfreeze' if @list.is_disabled
+    delete = Struct::Actions.new 'delete', 'fa fa-times', nil, "#delete_list_#{@list.id}", 'modal'
+    actions = select_allowed_actions freeze, delete
     respond_to do |format|
-      format.js { render 'lists/allowed_actions', locals: {actions: actions, id: @list.id} }
+      format.js { render 'lists/allowed_actions', locals: { actions: actions, id: @list.id } }
     end
   end
 
   private
 
-  def get_actions
-    @list = List.find params[:id]
-    board = @list.board
-    Struct.new 'Actions', :hint, :icon_class, :method, :link_path, :data_toggle
-    freeze = Struct::Actions.new 'freeze', 'fa fa-ban', :put, switch_list_editability_path(board, @list), nil
-    freeze.hint = 'unfreeze' if @list.is_disabled
-    delete = Struct::Actions.new 'delete', 'fa fa-times', nil, "#delete_list_#{@list.id}", 'modal'
+  def select_allowed_actions(freeze, delete)
     actions = []
-    actions << freeze if board.creator_id == current_user.id
-    actions << delete if board.creator_id == current_user.id || !@list.is_disabled
+    actions << freeze if @board.creator_id == current_user.id
+    actions << delete if @board.creator_id == current_user.id || !@list.is_disabled
     actions
   end
 
@@ -74,16 +72,16 @@ class ListsController < ApplicationController
   end
 
   def check_creator_of_board
-    redirect_to dashboard_path(params[:board_id]), flash: {warning: "You have no permissions to perform this action"} unless current_user.id == @list.board.creator_id
+    redirect_to dashboard_path(params[:board_id]), flash: { warning: 'You have no permissions to perform this action' } unless current_user.id == @list.board.creator_id
   end
 
   def set_current_list
     @list = List.find_by id: params[:id]
-    redirect_to dashboard_path(params[:id]), flash: {warning: 'List not found'} unless @list
+    redirect_to dashboard_path(params[:id]), flash: { warning: 'List not found' } unless @list
   end
 
   def list_enabled?
     board = Board.find params[:board_id]
-    redirect_to dashboard_path(params[:board_id]), flash: {warning: "List is disabled!"} if @list.is_disabled && current_user.id != board.creator_id
+    redirect_to dashboard_path(params[:board_id]), flash: { warning: 'List is disabled!' } if @list.is_disabled && current_user.id != board.creator_id
   end
 end
