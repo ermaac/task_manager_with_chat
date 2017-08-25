@@ -11,4 +11,10 @@ class RoomChannel < ApplicationCable::Channel
   def speak(data)
     Message.create(text: data['message'], user_id: current_user.id, chat_id: current_chat.id)
   end
+
+  private
+
+  def current_chat
+    Chat.find_by board_id: params[:room]
+  end
 end

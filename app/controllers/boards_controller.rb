@@ -14,7 +14,8 @@ class BoardsController < ApplicationController
   def destroy
     @board = Board.find params[:id]
     if @board.destroy
-      redirect_to root_path
+      ActionCable.server.broadcast "boards_channel_#{params[:id]}", action: 'destroy', info: { id: @board.id, location: '/' }
+      ActionCable.server.broadcast 'boards_channel_0', id: params[:id]
     else
       flash[:notice] = "Error destroying board"
     end
