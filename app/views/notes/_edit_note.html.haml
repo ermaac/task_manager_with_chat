@@ -1,4 +1,4 @@
-.modal.fade.bs-example-modal-sm{role: 'dialog', id: "edit_#{modal_id}"}
+.modal.bs-example-modal-sm{role: 'dialog', id: "edit_note_#{modal_id}"}
   .modal-dialog
     .modal-content
       .modal-header
@@ -13,4 +13,10 @@
             = form_for note,remote:'true', url: board_list_note_path(@board, list, note) do |f|
               .input-group.form-group
                 = f.text_area :text, class: 'form-control col-xs-9', required: true, placeholder: "Edit note", autocomplete: 'off', cols: 40, rows: 4
-              = f.submit 'Update note', class: 'btn btn-primary col-xs-9'
+              = f.submit 'Update note', class: 'btn btn-primary col-xs-9', id: "edit_note_button_#{note.id}"
+:javascript
+  $(document).ready(function() {
+    $("#edit_note_button_#{note.id}").click(function(){
+      $("#edit_note_#{modal_id}").modal('toggle')
+    })
+  })

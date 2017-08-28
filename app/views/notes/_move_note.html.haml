@@ -1,4 +1,4 @@
-.modal.fade.bd-example-modal-sm{role: 'dialog', id: "move_#{modal_id}"}
+.modal.bd-example-modal-sm{role: 'dialog', id: "move_note_#{modal_id}"}
   .modal-dialog.modal-sm
     .modal-content
       .modal-header
@@ -17,4 +17,4 @@
                 - @lists.each do |list|
                   %li
                     - if(list.id != note.list_id)
-                      = link_to list.title,move_path(@board, list, note),method: :patch, remote: true
+                      = link_to list.title,move_path(@board, list, note),method: :patch, remote: true, 'data-dismiss': 'modal'
