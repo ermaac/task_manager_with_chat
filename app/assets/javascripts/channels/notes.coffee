@@ -14,12 +14,10 @@ App.notes = App.cable.subscriptions.create "NotesChannel",
     unless data.action.blank?
       switch data.action
         when 'create'
-          $(list_id).append data.note
+          $("#{list_id} .list").append data.note
           $('textarea').val('')
         when "move"
-          console.log(data.current_note_list_id)
-          console.log(list_id)
-          $(list_id).append data.note
+          $("#{list_id} .list").append data.note
           current_list_id = '#list_' + data.current_note_list_id
           $("#{current_list_id} #{note_id}").remove()
           $("#{current_list_id} #{edit_modal_id}").remove()

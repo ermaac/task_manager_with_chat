@@ -18,4 +18,4 @@
             = link_to "#move_note_#{note.id}", 'data-toggle': 'modal', title: "move note" do
               .fa.fa-location-arrow
   .panel-body.scrollable.note
-    %span= simple_format(note.text)
+    %span.content_for_update= simple_format(note.text)
