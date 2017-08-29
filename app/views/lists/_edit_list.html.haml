@@ -1,4 +1,4 @@
-.modal.fade.bs-example-modal-sm{role: 'dialog', id: "update_#{modal_id}"}
+.modal.fade.bs-example-modal-sm{role: 'dialog', id: "update_list_#{modal_id}"}
   .modal-dialog.modal-sm
     .modal-content
       .modal-header
@@ -6,11 +6,11 @@
           &times;
         .text-center
           %h4
-            Update list
+            Update list's title
       .modal-body
         .row
           .col-sm-offset-2
-            = form_for list, url: board_list_path(@board, list) do |f|
+            = form_for list, remote: true, url: board_list_path(@board, list) do |f|
               .input-group.form-group
-                = f.text_field :title, class: 'form-control col-xs-9', required: true, placeholder: "Note's content"
-              = f.submit 'Update note', class: 'btn btn-primary col-xs-9'
+                = f.text_field :title, class: 'form-control col-xs-9', required: true, placeholder: "Note's content", autocomplete: 'off'
+              = f.submit 'Update list', class: 'btn btn-primary col-xs-9'

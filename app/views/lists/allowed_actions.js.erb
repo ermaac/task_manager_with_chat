@@ -1,0 +1,6 @@
+menu = $("#list_<%= id %> .actions_menu")
+menu.attr('data-content', '<%= j (render partial: 'action', collection: actions)%>')
+if (menu.attr('data-content') == '')
+  menu.remove()
+else
+  menu.popover({html: true})

@@ -18,8 +18,12 @@
             <td><%= Board.find(i.board_id).title %></td>
             <td><%= User.find(i.invitor_id).email %></td>
             <td>
+              <div class='col'>
               <%= link_to "Confirm", user_boards_path(board_id: i.board_id), method: :post, class:"btn btn-success" %>
+              </div>
+              <div class='col'>
               <%= link_to "Reject", invitation_path(i), method: :delete, class:"btn btn-danger" %>
+              </div>
             </td>
           </tr>
         <% end %>

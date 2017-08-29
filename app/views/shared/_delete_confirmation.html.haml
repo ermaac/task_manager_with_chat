@@ -1,5 +1,5 @@
-.modal.fade{role: 'dialog', id: "delete_#{modal_id}"}
-  .modal-dialog
+.modal.bs-example-modal-sm{role: 'dialog', id: "delete_#{modal_id}"}
+  .modal-dialog.modal-sm
     .modal-content
       .modal-header
         %button{type: 'button', class: 'close', 'data-dismiss': 'modal'}
@@ -13,5 +13,5 @@
       .modal-footer
         .btn.btn-success{'data-dismiss': 'modal'}
           Cancel
-        %a.btn.btn-danger{href: path, 'data-method': 'delete'}
+        %a.btn.btn-danger{href: path, 'data-method': 'delete','data-dismiss':'modal', remote: 'true', rel: 'nofollow'}
           Confirm

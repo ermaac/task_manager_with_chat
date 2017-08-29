@@ -1,3 +1,13 @@
 // Place all the styles related to the Note controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+span {
+  word-wrap: break-word;
+}
+
+.note {
+  height: 100px;
+}
+.dropdown-menu#note_menu{
+  min-width: 10px;
+}

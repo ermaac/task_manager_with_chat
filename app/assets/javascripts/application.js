@@ -10,9 +10,16 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require_self
 //= require jquery
 //= require jquery_ujs
 //= require cable
-//= require rails-ujs
 //= require_tree .
-
+//
+getBoardId = function(){
+  matchedResult = window.location.pathname.match(/\/dashboards\/(\d+)/)
+  if (matchedResult)
+    return matchedResult[1];
+  else
+    return null;
+}

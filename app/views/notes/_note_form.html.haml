@@ -1,4 +1,4 @@
-= form_for @note, url: board_list_notes_path(@board, list, @note) do |f|
+= form_for @note,remote: true, url: board_list_notes_path(@board, list, @note) do |f|
   .form-group
-    = f.text_area :text, class: 'form-control', required: true, placeholder: "New note", size: 'auto x2'
+    = f.text_area :text, class: 'form-control', required: true, placeholder: "New note", size: 'auto x2', autocomplete: 'off'
     = f.submit @form_name, class: 'btn btn-success btn-block', disabled: list.is_disabled

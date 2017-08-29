@@ -12,6 +12,7 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li><%= link_to "About"  , static_pages_about_path %></li>
+        <!-- <li><%= link_to "Admin" , rails_admin_path %></li> -->
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <% unless user_signed_in? %>
@@ -22,16 +23,19 @@
             <% end %>
           </li>
         <% else %>
+          <li id="notification">
+            <a class="glyphicon glyphicon-bell" href="#"></a>
+          </li>
           <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
               <%= current_user.email %> <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
               <li>
-                <a href="#">
+                <%= link_to profile_path(current_user) do %>
                   <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                   <span> Profile</span>
-                </a>
+                <% end %>
               </li>
               <li>
                 <a href="<%= invitations_path %>">

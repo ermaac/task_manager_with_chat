@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170816114909) do
+ActiveRecord::Schema.define(version: 20170823135849) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,24 @@ ActiveRecord::Schema.define(version: 20170816114909) do
     t.bigint "user_to_invite_id"
     t.boolean "accepted", default: false
     t.index ["board_id"], name: "index_invitations_on_board_id"
+  end
+
+  create_table "invited_user_permissions", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "board_id"
+    t.boolean "create_message", default: true
+    t.boolean "create_note", default: true
+    t.boolean "edit_note", default: true
+    t.boolean "delete_note", default: true
+    t.boolean "move_note_to_other_list", default: true
+    t.boolean "create_list", default: true
+    t.boolean "edit_list_name", default: true
+    t.boolean "delete_list", default: true
+    t.boolean "freeze_list", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["board_id"], name: "index_invited_user_permissions_on_board_id"
+    t.index ["user_id"], name: "index_invited_user_permissions_on_user_id"
   end
 
   create_table "lists", force: :cascade do |t|
@@ -67,9 +85,12 @@ ActiveRecord::Schema.define(version: 20170816114909) do
     t.string "last_name"
     t.date "birthdate"
     t.string "phone"
-    t.string "photo_url"
     t.bigint "user_id"
     t.integer "sex"
+    t.string "avatar_file_name"
+    t.string "avatar_content_type"
+    t.integer "avatar_file_size"
+    t.datetime "avatar_updated_at"
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 

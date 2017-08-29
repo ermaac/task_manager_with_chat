@@ -1,0 +1,22 @@
+.col-md-3
+  .panel.panel-default.list-panel
+    .panel-heading
+      - if list.is_disabled
+        %span.list_title
+          = list.title
+      - else
+        = link_to list.title, "#update_list_#{list.id}", 'data-toggle': 'modal', class: 'list_title'
+      %a.pull-right.actions_menu{'data-toggle': 'popover',
+                                 'data-content': '',
+                                 'data-trigger': 'focus',
+                                  href: '#',
+                                  list: "#{list.id}",
+                                  'data-placement': 'bottom',
+                                  role: 'button'}
+        %span.glyphicon.glyphicon-menu-down
+    .panel-body
+      .list.scrollable
+        = render partial: 'notes/note', collection: list.notes.order('created_at asc'), locals: {list: list}
+      - unless list.is_disabled
+        - if can? :create, @note
+          = render 'notes/note_form', list: list

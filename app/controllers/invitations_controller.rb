@@ -2,8 +2,7 @@
 
 class InvitationsController < ApplicationController
   authorize_resource
-  before_action :board_exist, :user_email_presence, only: :create
-  #before_action :authenticate_user!
+  skip_authorize_resource only: :index
   before_action :user_email_presence, only: :create
 
   def index
