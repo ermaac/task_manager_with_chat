@@ -1,7 +1,7 @@
 = render 'shared/delete_confirmation', object_type: 'note', path: board_list_note_path(@board, list, note), modal_id: note.object_id
 = render 'notes/edit_note', note: note, modal_id: "#{note.object_id}", list: list
 = render 'notes/move_note', note: note, modal_id: "#{note.object_id}", list: list
-.panel.panel-default{id: "note_#{note.id}"}
+.panel.panel-default.note_panel{id: "note_#{note.id}"}
   - if !list.is_disabled
     .col-sm-12
       .dropdown.pull-right

@@ -1,9 +1,35 @@
+.chat-area {
+  height: 100%;
+  width: 100%;
+  padding-right: 0 !important;
+  display: table;
+}
+.chat-area .row {
+  width: 100%;
+  // padding-right: 0 !important;
+  .col {
+    padding: 0;
+    height: 100%;
+    // width: 100%;
+    // display: table-cell;
+  }
+}
+
 #block_for_chat {
-  height: 72vh;
+  height: calc(100% - 20px);
+}
+
+#chat_row {
+  display: table-row;
+  height: 100%;
 }
 
 .chat {
-  height: 59vh;
+  height: 60vh;
+}
+
+#chat_area {
+  height: 100%;
 }
 
 #messages {
@@ -18,4 +44,10 @@ p {
 .message-author {
   font-style: italic;
   color: black;
+}
+
+.panel-footer {
+  position: absolute;
+  bottom: 21px;
+  width: calc(100% - 2px);
 }

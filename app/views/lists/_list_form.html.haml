@@ -1,4 +1,4 @@
-.col-md-12
+.col.col-md-12#new_list_form
   = form_for @list, remote: true, url: board_lists_path(@board, @list) do |f|
     .form-group
       = f.text_field :title, class: 'form-control', required: true, placeholder: "List's title", autocomplete: 'off', id: "new_list_title"
