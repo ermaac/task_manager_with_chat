@@ -1,4 +1,4 @@
-App.lists = App.cable.subscriptions.create "ListsChannel",
+App.lists = App.cable.subscriptions.create channel: "ListsChannel", room: getBoardId(),
   connected: ->
     # Called when the subscription is ready for use on the server
 

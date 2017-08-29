@@ -12,11 +12,14 @@ class User < ApplicationRecord
   has_many :user_boards, dependent: :destroy
   has_many :boards, through: :user_boards, dependent: :destroy
   has_many :messages, dependent: :destroy
+  has_many :invited_user_permissions, dependent: :destroy
   has_one  :profile, dependent: :destroy
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, omniauth_providers: %i[facebook google_oauth2 github vkontakte]
+
+  enum role: [:admin, :user, :guest]
 
   def self.new_with_session(params, session)
     super.tap do |user|

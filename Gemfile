@@ -24,6 +24,8 @@ gem "paperclip", "~> 5.0.0"
 gem 'haml', '~>5.0.1'
 gem 'jquery-rails'
 gem 'pry'
+gem 'cancancan', '~> 2.0'
+gem 'rails_admin'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]

@@ -6,11 +6,11 @@
           &times;
         .text-center
           %h4
-            Update note
+            Update list's title
       .modal-body
         .row
           .col-sm-offset-2
-            = form_for note,remote:'true', url: board_list_note_path(@board, list, note) do |f|
+            = form_for list, remote: true, url: board_list_path(@board, list) do |f|
               .input-group.form-group
                 = f.text_area :text, class: 'form-control col-xs-9', required: true, placeholder: "Edit note", autocomplete: 'off', cols: 40, rows: 4
               = f.submit 'Update note', class: 'btn btn-primary col-xs-9 edit_note_button'

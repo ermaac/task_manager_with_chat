@@ -1,6 +1,6 @@
-class ListsChannel < ApplicationCable::Channel
+class UsersChannel < ApplicationCable::Channel
   def subscribed
-    stream_from "lists_channel_#{params[:room]}"
+    stream_for current_user
   end
 
   def unsubscribed

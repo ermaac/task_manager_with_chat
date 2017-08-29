@@ -1,0 +1,2 @@
+$('.joined_users').append('<%= j (render 'boards/joined_user', layout: false, user: user) %>')
+$('body>.container-fluid>.row').before('<%= j (render 'shared/dropdown_for_users', layout: false, user: user)  %>')

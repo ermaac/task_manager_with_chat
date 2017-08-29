@@ -18,4 +18,5 @@
       .list.scrollable
         = render partial: 'notes/note', collection: list.notes.order('created_at asc'), locals: {list: list}
       - unless list.is_disabled
-        = render 'notes/note_form', list: list
+        - if can? :create, @note
+          = render 'notes/note_form', list: list

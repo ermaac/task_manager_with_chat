@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class ListsController < ApplicationController
+  load_and_authorize_resource
   before_action :set_current_list
   skip_before_action :set_current_list, only: :create
   before_action :check_creator_of_board, only: :switch_editability
@@ -16,7 +17,7 @@ class ListsController < ApplicationController
     @is_creator = current_user.id == @board.creator_id
     if @list.save
       list = render_to_string 'lists/_list', layout: false, locals: { list: @list }
-      ActionCable.server.broadcast 'lists_channel', action: 'create', info: { list: list, id: @list.id }
+      ActionCable.server.broadcast "lists_channel_#{params[:board_id]}", action: 'create', info: { list: list, id: @list.id }
     else
       redirect_to dashboards_path(params[:board_id]), flash: { error: 'An error ocured while creating list' }
     end
@@ -24,7 +25,7 @@ class ListsController < ApplicationController
 
   def update
     if @list.update list_params
-      ActionCable.server.broadcast 'lists_channel', action: 'update', info: { list_id: @list.id, title: @list.title }
+      ActionCable.server.broadcast "lists_channel_#{params[:board_id]}", action: 'update', info: { list_id: @list.id, title: @list.title }
     else
       flash[:error] = 'An error ocured while updating list'
     end
@@ -38,12 +39,12 @@ class ListsController < ApplicationController
     @lists = List.where board_id: params[:board_id]
     return unless @list.save
     list = render_to_string 'lists/_list_panel', layout: false, locals: { list: @list }
-    ActionCable.server.broadcast 'lists_channel', action: 'switch_list_editability', info: { id: @list.id, list: list }
+    ActionCable.server.broadcast "lists_channel_#{params[:board_id]}", action: 'switch_list_editability', info: { id: @list.id, list: list }
   end
 
   def destroy
     @list.destroy
-    ActionCable.server.broadcast 'lists_channel', action: 'destroy', info: { id: @list.id }
+    ActionCable.server.broadcast "lists_channel_#{params[:board_id]}", action: 'destroy', info: { id: @list.id }
   end
 
   def allowed_actions

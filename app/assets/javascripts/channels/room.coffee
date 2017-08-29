@@ -1,4 +1,4 @@
-App.room = App.cable.subscriptions.create "RoomChannel",
+App.room = App.cable.subscriptions.create channel: "RoomChannel", room: getBoardId(),
   connected: ->
     # Called when the subscription is ready for use on the server
 

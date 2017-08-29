@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 class InvitationsController < ApplicationController
-  before_action :authenticate_user!
+  authorize_resource
+  skip_authorize_resource only: :index
   before_action :user_email_presence, only: :create
 
   def index
