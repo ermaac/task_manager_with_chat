@@ -1,5 +1,5 @@
 = render 'shared/delete_confirmation', object_type: 'note', path: board_list_note_path(@board, list, note), modal_id: note.id
-= render 'notes/edit_note', note: note, modal_id: "#{note.id}", list: list
+= render 'notes/edit_note', note: note, list: list
 = render 'notes/move_note', note: note, modal_id: "#{note.id}", list: list
 .panel.panel-default{id: "note_#{note.id}"}
   - if !list.is_disabled
@@ -12,7 +12,7 @@
             = link_to "#delete_#{note.id}", 'data-toggle': 'modal',title: "delete note" do
               .fa.fa-times
           %li
-            = link_to "#edit_note_#{note.id}", 'data-toggle': 'modal', title: "edit note" do
+            = link_to "#edit_notes_#{note.id}", 'data-toggle': 'modal', title: "edit note" do
               .fa.fa-pencil
           %li
             = link_to "#move_note_#{note.id}", 'data-toggle': 'modal', title: "move note" do

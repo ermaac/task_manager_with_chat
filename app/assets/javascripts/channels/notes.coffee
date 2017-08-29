@@ -8,7 +8,7 @@ App.notes = App.cable.subscriptions.create "NotesChannel",
   received: (data) ->
     list_id = '#list_' + data.list_id
     note_id = '#note_' + data.note_id
-    edit_modal_id = '#edit_note_' + data.note_id
+    edit_modal_id = '#edit_notes_' + data.note_id
     delete_modal_id = '#delete_' + data.note_id
     move_modal_id = '#move_note_' + data.note_id
     unless data.action.blank?
