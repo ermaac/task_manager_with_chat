@@ -9,7 +9,7 @@ class NotesController < ApplicationController
     note = Note.new note_params
     note.list_id = params[:list_id]
     if note.save
-      ActionCable.server.broadcast 'notes_channel',
+      ActionCable.server.broadcast "notes_channel_#{params[:board_id]}",
                                    note: render_note(note),
                                    list_id: params[:list_id],
                                    action: params[:action]
@@ -20,7 +20,7 @@ class NotesController < ApplicationController
 
   def destroy
     if @note.destroy
-      ActionCable.server.broadcast 'notes_channel',
+      ActionCable.server.broadcast "notes_channel_#{params[:board_id]}",
                                    action: params[:action],
                                    note_id: params[:id],
                                    list_id: params[:list_id]
@@ -31,7 +31,7 @@ class NotesController < ApplicationController
 
   def update
     if @note.update note_params
-      ActionCable.server.broadcast 'notes_channel',
+      ActionCable.server.broadcast "notes_channel_#{params[:board_id]}",
                                    action: params[:action],
                                    note_id: params[:id],
                                    note_text: params[:note][:text]
@@ -45,7 +45,7 @@ class NotesController < ApplicationController
     current_note_id = note.list_id
     @lists = List.where(board_id: params[:board_id])
     return unless note.update(list_id: params[:list_id])
-    ActionCable.server.broadcast 'notes_channel',
+    ActionCable.server.broadcast "notes_channel_#{params[:board_id]}",
                                  current_note_list_id: current_note_id,
                                  note: render_note(note),
                                  note_id: note.id,

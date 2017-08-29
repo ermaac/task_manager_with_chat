@@ -1,7 +1,10 @@
+# frozen_string_literal: true
+
 class DashboardsController < ApplicationController
-  before_action :authenticate_user!, only: [:index, :show]
+  before_action :authenticate_user!, only: %i(index show)
   before_action :find_board, only: :show
 
+  respond_to :js, :html
   helper DashboardsHelper
 
   def index
@@ -27,8 +30,9 @@ class DashboardsController < ApplicationController
   def create
     user_board = UserBoard.new(user_board_params)
     if user_board.save
+      ActionCable.server.broadcast "boards_channel_#{params[:board_id]}", action: 'join_user', info: { user_id: current_user.id }
       redirect_to root_path
-      flash[:success] = "You have successfully joined to board "
+      flash[:success] = 'You have successfully joined to board'
     else
       redirect_to invitations_path
     end
@@ -37,15 +41,20 @@ class DashboardsController < ApplicationController
   def destroy
     deleted_user = UserBoard.where(prepare_delete_user_params).first
     if deleted_user.destroy
-      flash[:success] = "You successfuly deleted user #{User.find(@user_id).profile.first_name}"
-      redirect_to root_path
+      flash[:success] = "You successfuly deleted user #{@user.profile.first_name}"
+      ActionCable.server.broadcast "boards_channel_#{params[:id]}", action: 'kick_user', info: { id: @user_id }
+      UsersChannel.broadcast_to @user, action: 'leave_board', info: { id: "board_#{params[:id]}" }
     else
-      flash[:warning] = "Something went wrong"
+      flash[:warning] = 'Something went wrong'
     end
   end
 
-  def create_message
-    Message.create(text: data['message'], user_id: current_user.id, chat_id: Chat.find_by(id: id).id)
+  def join_user
+    @board = Board.find params[:id]
+    user = User.find params[:user_id]
+    respond_to do |format|
+      format.js { render 'joined_user.js.erb', locals: { user: user } }
+    end
   end
 
   private
@@ -53,19 +62,19 @@ class DashboardsController < ApplicationController
   def user_board_params
     board_id = params[:board_id]
     Invitation.where(board_id: board_id, user_to_invite_id: current_user.id).first.destroy
-    {user_id: current_user.id, board_id: board_id}
+    { user_id: current_user.id, board_id: board_id }
   end
 
   def prepare_delete_user_params
     @user_id = params[:user_id]
+    @user = User.find @user_id
     board_id = params[:id]
-    {user_id: @user_id, board_id: board_id}
+    { user_id: @user_id, board_id: board_id }
   end
 
   def find_board
-    unless @board = current_user.boards.find_by(id: params[:id])
-      flash[:warning] = "You are not accepted in this board"
-      redirect_to root_path
-    end
+    return if @board = current_user.boards.find_by(id: params[:id])
+    flash[:warning] = 'You are not accepted in this board'
+    redirect_to root_path
   end
 end

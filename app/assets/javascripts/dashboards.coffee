@@ -5,6 +5,7 @@ $ ->
   $('.scrollable').bind 'mousewheel', (e) ->
     e.preventDefault
 $ ->
-  chat = $('.chat')
-  height = chat[0].scrollHeight
-  chat.scrollTop height
+  if window.location.pathname.match /\/dashboards\/\d+/
+    chat = $('.chat')
+    height = chat[0].scrollHeight
+    chat.scrollTop height
