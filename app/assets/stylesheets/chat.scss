@@ -16,7 +16,10 @@
 }
 
 #block_for_chat {
-  height: calc(100% - 20px);
+  height: calc(100% - 30px);
+  .panel-body {
+    height: calc(100% - 92px);
+  }
 }
 
 #chat_row {
@@ -46,8 +49,8 @@ p {
   color: black;
 }
 
-.panel-footer {
-  position: absolute;
-  bottom: 21px;
-  width: calc(100% - 2px);
-}
+// .panel-footer {
+//   position: absolute;
+//   bottom: 21px;
+//   width: calc(100% - 2px);
+// }

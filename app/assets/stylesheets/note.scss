@@ -5,14 +5,17 @@ span {
   word-wrap: break-word;
 }
 
-.note {
-  height: 100px;
-}
-
 .dropdown-menu#note_menu{
   min-width: 10px;
 }
 
 .note_panel {
   height: 130px;
+}
+
+pre {
+  padding: 0 !important;
+  background-color: inherit !important;
+  border: 0 !important;
+  font-family: inherit !important;
 }
