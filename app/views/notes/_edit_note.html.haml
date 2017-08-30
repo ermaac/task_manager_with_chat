@@ -1,16 +1,16 @@
-.modal.bs-example-modal-sm.edit_notes{role: 'dialog', id: "edit_notes_#{note.id}"}
-  .modal-dialog
+.modal.fade.bs-example-modal-sm{role: 'dialog', id: "update_list_#{modal_id}"}
+  .modal-dialog.modal-sm
     .modal-content
       .modal-header
         %button{type: 'button', class: 'close', 'data-dismiss': 'modal'}
           &times;
         .text-center
           %h4
-            Update note
+            Update list's title
       .modal-body
         .row
           .col-sm-offset-2
-            = form_for note,remote:'true', url: board_list_note_path(@board, list, note) do |f|
+            = form_for list, remote: true, url: board_list_path(@board, list) do |f|
               .input-group.form-group
-                = f.text_area :text, class: 'form-control col-xs-9', required: true, placeholder: "Edit note", autocomplete: 'off', cols: 40, rows: 4
-              = f.submit 'Update note', class: 'btn btn-primary col-xs-9 edit_note_button'
+                = f.text_field :title, class: 'form-control col-xs-9', required: true, placeholder: "Note's content", autocomplete: 'off'
+              = f.submit 'Update list', class: 'btn btn-primary col-xs-9'
