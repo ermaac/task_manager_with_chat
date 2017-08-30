@@ -5,7 +5,12 @@ App.users = App.cable.subscriptions.create channel: "UsersChannel",
   disconnected: ->
     # Called when the subscription has been terminated by the server
   leave_board: (info) ->
-    $("##{info['id']}").remove()
+    location = window.location
+    id = getBoardId()
+    if location.pathname.match /\/|\/dashboards/
+      $("#board_#{info['id']}").remove()
+    if id == info['id']
+      location.replace info['location']
 
   received: (data) ->
     action = data['action']

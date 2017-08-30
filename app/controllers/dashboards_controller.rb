@@ -43,7 +43,7 @@ class DashboardsController < ApplicationController
     if deleted_user.destroy
       flash[:success] = "You successfuly deleted user #{@user.profile.first_name}"
       ActionCable.server.broadcast "boards_channel_#{params[:id]}", action: 'kick_user', info: { id: @user_id }
-      UsersChannel.broadcast_to @user, action: 'leave_board', info: { id: "board_#{params[:id]}" }
+      UsersChannel.broadcast_to @user, action: 'leave_board', info: { id: "#{params[:id]}", location: '/' }
     else
       flash[:warning] = 'Something went wrong'
     end
