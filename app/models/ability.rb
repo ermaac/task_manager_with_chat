@@ -28,12 +28,13 @@ class Ability
     can :show, [:dashboard, Profile]
     can :create, [Board, Invitation, :dashboard]
     can :update, [Profile]
-    can :destroy, [Board, Invitation]
+    can :destroy, [Board, Invitation, :dashboard]
 
     can :switch_editability, List if $board_id.invited_user_permissions.find_by(user_id: user.id).freeze_list?
     can :destroy, List if $board_id.invited_user_permissions.find_by(user_id: user.id).delete_list?
     can :update, List if $board_id.invited_user_permissions.find_by(user_id: user.id).edit_list_name?
     can :create, List if $board_id.invited_user_permissions.find_by(user_id: user.id).create_list?
+    can :allowed_actions, List
 
     can :create, Note if $board_id.invited_user_permissions.find_by(user_id: user.id).create_note?
     can :update, Note if $board_id.invited_user_permissions.find_by(user_id: user.id).edit_note?
