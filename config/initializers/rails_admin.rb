@@ -22,17 +22,28 @@ RailsAdmin.config do |config|
   ## == Gravatar integration ==
   ## To disable Gravatar integration in Navigation Bar set to false
   # config.show_gravatar = true
-
+  config.model 'Invitation' do
+    exclude_fields :accepted
+  end  
   config.actions do
     dashboard                     # mandatory
     index                         # mandatory
     new
-    export
     bulk_delete
-    show
-    edit
-    delete
-    show_in_app
+    show do
+      except ['Invitation']
+    end  
+    edit do
+      except ['Chat']
+      except ['Profile']
+    end  
+    delete do
+      except ['Chat']
+      except ['Profile']
+    end  
+    show_in_app do
+      except ['Invitation']
+    end  
 
     ## With an audit adapter, you can add:
     # history_index
