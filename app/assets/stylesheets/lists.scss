@@ -24,6 +24,12 @@
     height: calc(100% - 40px);
     padding-bottom: 0 !important;
   }
+  a {
+    color: black;
+  }
+  a:hover {
+    color: blue;
+  }
 }
 
 .list {
@@ -33,4 +39,8 @@
 
 #new_list_form {
   margin-left: 12px;
+}
+
+.dropdown-menu.list_actions_menu {
+  min-width: 10px;
 }
