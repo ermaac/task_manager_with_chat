@@ -14,7 +14,7 @@ class NotesController < ApplicationController
                                    list_id: params[:list_id],
                                    action: params[:action]
     else
-      flash[:notice] = 'Error creating note'
+      flash[:alert] = 'Error creating note'
     end
   end
 
@@ -25,7 +25,7 @@ class NotesController < ApplicationController
                                    note_id: params[:id],
                                    list_id: params[:list_id]
     else
-      flash[:error] = 'Error destroying note'
+      flash[:alert] = 'Error destroying note'
     end
   end
 
@@ -36,7 +36,7 @@ class NotesController < ApplicationController
                                    note_id: params[:id],
                                    note_text: params[:note][:text]
     else
-      flash[:error] = 'Error updating note'
+      flash[:alert] = 'Error updating note'
     end
   end
 

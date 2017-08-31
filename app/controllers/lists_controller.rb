@@ -18,7 +18,7 @@ class ListsController < ApplicationController
       list = render_to_string 'lists/_list', layout: false, locals: { list: @list }
       ActionCable.server.broadcast "lists_channel_#{params[:board_id]}", action: 'create', info: { list: list, id: @list.id }
     else
-      redirect_to dashboards_path(params[:board_id]), flash: { error: 'An error ocured while creating list' }
+      redirect_to dashboards_path(params[:board_id]), flash: { alert: 'An error ocured while creating list' }
     end
   end
 
@@ -26,7 +26,7 @@ class ListsController < ApplicationController
     if @list.update list_params
       ActionCable.server.broadcast "lists_channel_#{params[:board_id]}", action: 'update', info: { list_id: @list.id, title: @list.title }
     else
-      flash[:error] = 'An error ocured while updating list'
+      flash[:alert] = 'An error ocured while updating list'
     end
   end
 
