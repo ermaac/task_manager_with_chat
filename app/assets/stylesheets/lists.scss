@@ -3,6 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .lists-area {
   height: 100%;
+  max-width: 75vw;
   display: flex;
   display: -webkit-flex;
   overflow-x: auto;
@@ -16,7 +17,6 @@
 
 .list-panel {
   width: 17vw;
-  // height: 80.6vh;
   height: calc(100% - 20px);
   flex: 0, 0, 0;
   margin-right: 20px;
