@@ -7,7 +7,7 @@
       </div>
       <div class="modal-body">
       <% if board_creator? current_user %>
-        <%= form_for user_permission(@board, user) do |f| %>
+        <%= form_for user_permission(@board, user), remote: true do |f| %>
           <%= hidden_field_tag :board_id, @board.id %>
           <%= hidden_field_tag :user_id, user.id %>
           <% InvitedUserPermission::PERMITTABLE_FIELDS.each do |field_name| %>

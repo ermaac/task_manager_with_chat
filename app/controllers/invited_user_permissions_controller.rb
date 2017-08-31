@@ -3,8 +3,13 @@ class InvitedUserPermissionsController < ApplicationController
   def update
     @invited_user_permission = InvitedUserPermission.find_by(board_id: params[:board_id],
                                                              user_id: params[:user_id])
-    @invited_user_permission.update(invited_user_permission_params)
-    redirect_to dashboard_path(params[:board_id])
+    if @invited_user_permission.update invited_user_permission_params
+      ActionCable.server.broadcast "invited_user_permissions_channel_#{params[:board_id]}",
+                                   permissions: params[:invited_user_permission],
+                                   user_id: params[:user_id]
+    else
+      flash[:error] = 'Error updating permissions'
+    end
   end
 
   private
