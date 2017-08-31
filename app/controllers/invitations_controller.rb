@@ -11,9 +11,9 @@ class InvitationsController < ApplicationController
   def create
     @invitation = Invitation.new(prepare_params)
     if @invitation.save
-      flash[:success] = 'inviting successfuly was sent'
+      flash[:notice] = 'Invitation was succesfully sent'
     else
-      flash[:warning] = @invitation.errors.messages.to_s
+      flash[:alert] = "Something went wrong: invitation wasn't sent"
     end
       redirect_to invitations_path
   end
