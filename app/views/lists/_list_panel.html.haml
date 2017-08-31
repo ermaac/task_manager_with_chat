@@ -11,17 +11,14 @@
           .glyphicon.glyphicon-menu-hamburger.note_icon
         %ul.list_actions_menu{class: 'dropdown-menu', role: 'menu'}
           %li
-            - if can? :destroy, list
-              = link_to "#delete_list_#{list.id}", 'data-toggle'=>'modal' do
-                .fa.fa-times
+            = link_to "#delete_list_#{list.id}", 'data-toggle'=>'modal' do
+              .fa.fa-times
           %li
-            - if can? :update, list
-              = link_to "#update_list_#{list.id}", 'data-toggle'=>'modal' do
-                .fa.fa-pencil
+            = link_to "#update_list_#{list.id}", 'data-toggle'=>'modal' do
+              .fa.fa-pencil
           %li
-            - if can? :switch_editability, list
-              = link_to switch_list_editability_path(@board, list), method: :put, remote: true do
-                .fa.fa-ban
+            = link_to switch_list_editability_path(@board, list), method: :put, remote: true do
+              .fa.fa-ban
     .panel-body
       .list.scrollable
         = render partial: 'notes/note', collection: list.notes.order('created_at asc'), locals: {list: list}

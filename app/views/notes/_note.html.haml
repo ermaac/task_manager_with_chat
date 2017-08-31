@@ -9,17 +9,14 @@
           .glyphicon.glyphicon-menu-hamburger.note_icon
         %ul{class: 'dropdown-menu', role: 'menu', id: "note_menu"}
           %li
-            - if can? :destroy, note
-              = link_to "#delete_#{note.id}", 'data-toggle': 'modal',title: "delete note" do
-                .fa.fa-times
+            = link_to "#delete_#{note.object_id}", 'data-toggle': 'modal',title: "delete note" do
+              .fa.fa-times
           %li
-            - if can? :update, note
-              = link_to "#edit_notes_#{note.id}", 'data-toggle': 'modal', title: "edit note" do
-                .fa.fa-pencil
+            = link_to "#edit_#{note.object_id}", 'data-toggle': 'modal', title: "edit note" do
+              .fa.fa-pencil
           %li
-            - if can? :move, note
-              = link_to "#move_note_#{note.id}", 'data-toggle': 'modal', title: "move note" do
-                .fa.fa-location-arrow
-    .panel-body.scrollable.note
-      %pre
-        %span.content_for_update= note.text
+            = link_to "#move_#{note.object_id}", 'data-toggle': 'modal', title: "move note" do
+              .fa.fa-location-arrow
+  .panel-body.scrollable.note
+    %pre
+      %span.content_for_update= note.text
