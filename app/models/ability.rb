@@ -39,6 +39,7 @@ class Ability
     can :update, Note if $board_id.invited_user_permissions.find_by(user_id: user.id).edit_note?
     can :destroy, Note if $board_id.invited_user_permissions.find_by(user_id: user.id).delete_note?
     can :move, Note if $board_id.invited_user_permissions.find_by(user_id: user.id).move_note_to_other_list?
+    can :update_drop, Note
 
     can :create_message, Board do |board|
       board.invited_user_permissions.find_by(user_id: user.id).create_message?

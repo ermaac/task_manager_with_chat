@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   resources :profiles, only: [:show, :update, :edit]
   post 'user_boards', to: 'dashboards#create', as: 'user_boards'
   patch '/boards/:board_id/lists/:list_id/notes/:id/move', to: 'notes#move', as: :move
+  patch '/notes/:board_id/:list_id/:note_id', to: 'notes#update_drop', as: :update_drop
   put '/boards/:board_id/lists/:id/switch_editability', to: 'lists#switch_editability', as: :switch_list_editability
   get '/lists/:id/allowed_actions', to: 'lists#allowed_actions', as: :list_allowed_actions
   get '/dashboards/:id/users/:user_id/join_user', to: 'dashboards#join_user'

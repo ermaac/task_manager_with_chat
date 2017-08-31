@@ -2,7 +2,7 @@
 
 class NotesController < ApplicationController
   before_action :set_current_note
-  skip_before_action :set_current_note, only: :create
+  skip_before_action :set_current_note, only: [:create, :update_drop]
   before_action :list_enabled?
   load_and_authorize_resource
 
@@ -53,6 +53,7 @@ class NotesController < ApplicationController
                                  list_id: params[:list_id],
                                  action: params[:action]
   end
+
 
   private
 

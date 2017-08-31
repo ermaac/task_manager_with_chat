@@ -67,6 +67,7 @@ class DashboardsController < ApplicationController
 
   private
 
+
   def set_glob
     $board_id = Board.find(params[:id])
   end

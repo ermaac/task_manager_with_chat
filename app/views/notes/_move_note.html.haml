@@ -11,9 +11,8 @@
         .dropdown
           .text-center
             .btn-group
-              %a{class: 'btn dropdown-toggle', 'data-toggle': 'dropdown', href:'#'}
-                %p Choose list
-              %ul.dropdown-menu
+              = link_to 'Choose list', update_drop_path(@board, list, note), method: :patch, class: 'btn dropdown-toggle', 'data-toggle': 'dropdown', remote: 'true'
+              %ul.dropdown-menu.dropdown_note
                 - @lists.each do |list|
                   %li
                     - if(list.id != note.list_id)
