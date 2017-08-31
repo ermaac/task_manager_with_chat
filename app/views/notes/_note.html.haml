@@ -8,15 +8,18 @@
         %a.dropdown-toggle{'data-toggle'=> 'dropdown', role: 'button', 'aria-haspopup'=>'true', 'aria-expanded'=>'false'}
           .glyphicon.glyphicon-menu-hamburger.note_icon
         %ul{class: 'dropdown-menu', role: 'menu', id: "note_menu"}
-          %li
-            = link_to "#delete_#{note.object_id}", 'data-toggle': 'modal',title: "delete note" do
-              .fa.fa-times
-          %li
-            = link_to "#edit_#{note.object_id}", 'data-toggle': 'modal', title: "edit note" do
-              .fa.fa-pencil
-          %li
-            = link_to "#move_#{note.object_id}", 'data-toggle': 'modal', title: "move note" do
-              .fa.fa-location-arrow
-  .panel-body.scrollable.note
+          %li{id: "destroy_note_board_id_#{@board.id}_user_id_#{current_user.id}"}
+            - if can? :destroy, @note
+              = link_to "#delete_#{note.object_id}", 'data-toggle': 'modal',title: "delete note" do
+                .fa.fa-times
+          %li{id: "edit_note_board_id_#{@board.id}_user_id_#{current_user.id}"}
+            - if can? :update, @note
+              = link_to "#edit_#{note.object_id}", 'data-toggle': 'modal', title: "edit note" do
+                .fa.fa-pencil
+          %li{id: "move_note_board_id_#{@board.id}_user_id_#{current_user.id}"}
+            - if can? :move, @note
+              = link_to "#move_#{note.object_id}", 'data-toggle': 'modal', title: "move note" do
+                .fa.fa-location-arrow
+  .panel-body.scrollable.note{id: "#{note.object_id}"}
     %pre
       %span.content_for_update= note.text

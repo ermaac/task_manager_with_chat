@@ -14,4 +14,4 @@
               %small.pull-right.text-muted
     .panel-footer
       - if can? :create_message, @board
-        %input#btn-input.form-control.input-sm{"data-behavior" => "room_speaker", :type => "text"}/
+        %input#btn-input.form-control.input-sm{"data-behavior" => "room_speaker", :type => "text", id: "chat-board_id_#{@board.id}_user_id_#{current_user.id}"}/
