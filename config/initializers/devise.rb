@@ -15,6 +15,7 @@ Devise.setup do |config|
   config.email_regexp = /\A[^@\s]+@[^@\s]+\z/
   config.reset_password_within = 6.hours
   config.sign_out_via = :delete
+  config.secret_key = '5d4440a9907dc813b56f07fa7f7c95d0e980f6500589d088c39de2f65b96e3b860d1d4b7b5d468590331aa935c5c243dbd5b6759e552f9b652ee877180285c34'
 
   config.omniauth :google_oauth2,
                   Rails.application.secrets.google_app_id,
