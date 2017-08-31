@@ -1,22 +1,30 @@
-.col-md-3
+.col.col-md-3
   .panel.panel-default.list-panel
     .panel-heading
-      - if list.is_disabled
-        %span.list_title
-          = list.title
-      - else
-        = link_to list.title, "#update_list_#{list.id}", 'data-toggle': 'modal', class: 'list_title'
-      %a.pull-right.actions_menu{'data-toggle': 'popover',
-                                 'data-content': '',
-                                 'data-trigger': 'focus',
-                                  href: '#',
-                                  list: "#{list.id}",
-                                  'data-placement': 'bottom',
-                                  role: 'button'}
-        %span.glyphicon.glyphicon-menu-down
+      %span.list_title
+        = list.title
+      .dropdown.pull-right{list: "#{list.id}"}
+        %a.dropdown-toggle{'data-toggle'=>'dropdown',
+                            role: 'button',
+                            'aria-haspopup'=>true,
+                            'aria-expanded'=>false}
+          .glyphicon.glyphicon-menu-hamburger.note_icon
+        %ul.list_actions_menu{class: 'dropdown-menu', role: 'menu'}
+          %li
+            - if can? :destroy, list
+              = link_to "#delete_list_#{list.id}", 'data-toggle'=>'modal' do
+                .fa.fa-times
+          %li
+            - if can? :update, list
+              = link_to "#update_list_#{list.id}", 'data-toggle'=>'modal' do
+                .fa.fa-pencil
+          %li
+            - if can? :switch_editability, list
+              = link_to switch_list_editability_path(@board, list), method: :put, remote: true do
+                .fa.fa-ban
     .panel-body
       .list.scrollable
         = render partial: 'notes/note', collection: list.notes.order('created_at asc'), locals: {list: list}
       - unless list.is_disabled
-        - if can? :create, @note
+        .list_footer
           = render 'notes/note_form', list: list

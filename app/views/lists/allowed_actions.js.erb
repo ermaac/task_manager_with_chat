@@ -1,6 +1,4 @@
-menu = $("#list_<%= id %> .actions_menu")
-menu.attr('data-content', '<%= j (render partial: 'action', collection: actions)%>')
-if (menu.attr('data-content') == '')
-  menu.remove()
-else
-  menu.popover({html: true})
+menu = $("#list_<%= id %> .list_actions_menu")
+menu.html('<%= j (render partial: 'action', collection: actions)%>')
+if (menu.html() == '')
+  $('.dropdown[list=<%= id %>]').remove()

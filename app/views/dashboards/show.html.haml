@@ -6,8 +6,6 @@
     = render partial: 'lists/list', collection: @lists
   .chat-area.col-md-3
     .row
-      - if can? :create, @list
-        = render 'lists/list_form'
-    .row
-      -if can? :create_message, @board
-        = render 'shared/chat'
+      = render 'lists/list_form'
+    .row#chat_row
+      = render 'shared/chat'

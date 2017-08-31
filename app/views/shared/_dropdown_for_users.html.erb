@@ -13,10 +13,10 @@
           <% InvitedUserPermission::PERMITTABLE_FIELDS.each do |field_name| %>
             <p>
               <%= f.check_box field_name %>
-              <%= field_name %>
+              <%= InvitedUserPermission::FIELD_NAMES[InvitedUserPermission::PERMITTABLE_FIELDS.index(field_name)] %>
             </p>
           <% end %>
-          <%= f.submit %>
+          <%= f.submit 'Update Permission', class: "btn btn-success" %>
         <% end %>
       <% end %>
       </div>

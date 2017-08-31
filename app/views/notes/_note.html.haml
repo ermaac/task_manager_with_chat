@@ -1,7 +1,7 @@
-= render 'shared/delete_confirmation', object_type: 'note', path: board_list_note_path(@board, list, note), modal_id: note.id
-= render 'notes/edit_note', note: note, list: list
-= render 'notes/move_note', note: note, modal_id: "#{note.id}", list: list
-.panel.panel-default{id: "note_#{note.id}"}
+= render 'shared/delete_confirmation', object_type: 'note', path: board_list_note_path(@board, list, note), modal_id: note.object_id
+= render 'notes/edit_note', note: note, modal_id: "#{note.object_id}", list: list
+= render 'notes/move_note', note: note, modal_id: "#{note.object_id}", list: list
+.panel.panel-default.note_panel{id: "note_#{note.id}"}
   - if !list.is_disabled
     .col-sm-12
       .dropdown.pull-right
@@ -21,4 +21,5 @@
               = link_to "#move_note_#{note.id}", 'data-toggle': 'modal', title: "move note" do
                 .fa.fa-location-arrow
   .panel-body.scrollable.note
-    %span.content_for_update= simple_format(note.text)
+    %pre
+      %span.content_for_update= note.text
