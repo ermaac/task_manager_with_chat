@@ -10,10 +10,16 @@ span {
 }
 
 .note_panel {
-  a {
-    color: black;
+  .dropdown {
+    a {
+      color: black;
+    }
+    a:hover {
+      color: blue;
+    }
   }
-  height: 130px;
+    height: 130px;
+  width: 100%;
 }
 
 pre {

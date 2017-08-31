@@ -4,31 +4,32 @@
       <div class="panel panel-default">
         <div class="panel-heading">List of invites</div>
       </div>
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Board name</th>
-          <th>Email</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @invite.each do |i| %>
+    <div class='table-responsive'>
+      <table class="table">
+        <thead>
           <tr>
-            <td><%= Board.find(i.board_id).title %></td>
-            <td><%= User.find(i.invitor_id).email %></td>
-            <td>
-              <div class='col'>
-              <%= link_to "Confirm", user_boards_path(board_id: i.board_id), method: :post, class:"btn btn-success" %>
-              </div>
-              <div class='col'>
-              <%= link_to "Reject", invitation_path(i), method: :delete, class:"btn btn-danger" %>
-              </div>
-            </td>
+            <th>Board name</th>
+            <th>Email</th>
+            <th></th>
+            <th></th>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          <% @invite.each do |i| %>
+            <tr>
+              <td><%= Board.find(i.board_id).title %></td>
+              <td><%= User.find(i.invitor_id).email %></td>
+              <td>
+                <%= link_to "Confirm", user_boards_path(board_id: i.board_id), method: :post, class:"btn btn-success" %>
+              </td>
+              <td>
+                <%= link_to "Reject", invitation_path(i), method: :delete, class:"btn btn-danger" %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
     </div>
     <div class="col-sm-4" >
       <div class="panel panel-default">
