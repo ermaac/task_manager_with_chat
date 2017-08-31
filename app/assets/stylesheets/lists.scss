@@ -27,11 +27,13 @@
     padding-bottom: 0 !important;
     width: 100%;
   }
-  a {
-    color: black;
-  }
-  a:hover {
-    color: blue;
+  .panel-heading {
+    a {
+      color: black;
+    }
+    a:hover {
+      color: blue;
+    }
   }
 }
 
