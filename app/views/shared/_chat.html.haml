@@ -13,4 +13,5 @@
                   = render @messages
               %small.pull-right.text-muted
     .panel-footer
-      %input#btn-input.form-control.input-sm{"data-behavior" => "room_speaker", :type => "text"}/
+      - if can? :create_message, @board
+        %input#btn-input.form-control.input-sm{"data-behavior" => "room_speaker", :type => "text"}/

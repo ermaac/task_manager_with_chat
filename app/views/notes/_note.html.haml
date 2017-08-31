@@ -20,6 +20,6 @@
             - if can? :move, note
               = link_to "#move_note_#{note.id}", 'data-toggle': 'modal', title: "move note" do
                 .fa.fa-location-arrow
-  .panel-body.scrollable.note
-    %pre
-      %span.content_for_update= note.text
+    .panel-body.scrollable.note
+      %pre
+        %span.content_for_update= note.text

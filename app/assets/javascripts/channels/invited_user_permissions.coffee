@@ -6,3 +6,5 @@ App.invited_user_permissions = App.cable.subscriptions.create channel: "InvitedU
     # Called when the subscription has been terminated by the server
 
   received: (data) ->
+
+

@@ -4,8 +4,8 @@
 .row
   .lists-area.col-md-9
     = render partial: 'lists/list', collection: @lists
-  .chat-area.col-md-3
+  .chat-area.col-md-3{id: "board_id_#{@board.id}"}
     .row
       = render 'lists/list_form'
-    .row#chat_row
+    .row{id: "chat_row_user_id_#{current_user.id}_bord_id_#{@board.id}"}
       = render 'shared/chat'
