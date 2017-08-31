@@ -19,4 +19,4 @@ App.notes = App.cable.subscriptions.create channel: "NotesChannel", room: getBoa
           note_id = '#note_' + data.note_id
           $("#{list_id} #{note_id}").remove()
         when 'destroy' then $("#{list_id} #{note_id}").remove()
-        when 'update' then $("#{note_id} p").text(data.note_text)
+        when 'update' then $("#{note_id} span").text(data.note_text)

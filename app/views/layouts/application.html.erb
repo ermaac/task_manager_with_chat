@@ -16,9 +16,6 @@
       <% if user_signed_in? %>
         <%= render "shared/header" %>
         <div class='flash-messages center-block'>
-          <!--   <% flash.each do |message_type, message| %> -->
-            <!--     <div class="alert alert&#45;<%= message_type %>"><%= simple_format(message) %></div> -->
-            <!--   <% end %> -->
           <% if notice %>
             <div class='alert alert-success'>
               <%= notice %>
