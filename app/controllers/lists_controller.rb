@@ -52,7 +52,8 @@ class ListsController < ApplicationController
     freeze = Struct::Actions.new 'freeze', 'fa fa-ban', :put, switch_list_editability_path(@board, @list), nil
     freeze.hint = 'unfreeze' if @list.is_disabled
     delete = Struct::Actions.new 'delete', 'fa fa-times', nil, "#delete_list_#{@list.id}", 'modal'
-    actions = select_allowed_actions freeze, delete
+    edit = Struct::Actions.new 'edit', 'fa fa-pencil', nil, "#update_list_#{@list.id}", 'modal'
+    actions = select_allowed_actions freeze, delete, edit
     respond_to do |format|
       format.js { render 'lists/allowed_actions', locals: { actions: actions, id: @list.id } }
     end
@@ -60,11 +61,12 @@ class ListsController < ApplicationController
 
   private
 
-  def select_allowed_actions(freeze, delete)
+  def select_allowed_actions(freeze, delete, edit)
     actions = []
     actions.tap do |x|
-    x << freeze if @board.creator_id == current_user.id
     x << delete if @board.creator_id == current_user.id || !@list.is_disabled
+    x << edit if @board.creator_id == current_user.id || !@list.is_disabled
+    x << freeze if @board.creator_id == current_user.id
     end
   end
 

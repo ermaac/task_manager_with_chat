@@ -1,13 +1,39 @@
+.chat-area {
+  height: 100%;
+  width: 100%;
+  padding-right: 0 !important;
+  display: table;
+}
+.chat-area .row {
+  width: 100%;
+  .col {
+    padding: 0;
+    height: 100%;
+  }
+}
+
 #block_for_chat {
-  height: 72vh;
+  height: calc(100% - 20px);
+  .panel-body {
+    height: calc(100% - 92px);
+  }
+}
+
+#chat_row {
+  display: table-row;
+  height: 100%;
 }
 
 .chat {
   height: 59vh;
 }
 
-#messages {
+#chat_area {
   height: 100%;
+}
+
+#messages {
+  height: 60vh;
 }
 
 p {
@@ -18,4 +44,9 @@ p {
 .message-author {
   font-style: italic;
   color: black;
+}
+
+.panel-footer {
+  position: absolute;
+  width: calc(100% - 2px);
 }

@@ -7,3 +7,19 @@
     border-radius: 0 !important;
   }
 }
+
+#working-area {
+  display: table;
+  width: 100%;
+  height: 100vh;
+  box-sizing: border-box;
+}
+
+#working-area>.row {
+  display: table-row;
+  height: 100%;
+}
+
+body>.container-fluid {
+  height: 100%;
+}

@@ -1,2 +1,3 @@
-= link_to "#{action.link_path}", method: "#{action.method}", title: "#{action.hint}", 'data-toggle': "#{action.data_toggle}" do
-  %div{class: "#{action.icon_class}"}
+%li
+  = link_to "#{action.link_path}", method: "#{action.method}", title: "#{action.hint}", 'data-toggle': "#{action.data_toggle}" do
+    %div{class: "#{action.icon_class}"}

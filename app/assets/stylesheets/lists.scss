@@ -2,18 +2,56 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .lists-area {
-  height: 84vh;
+  height: 100%;
+  max-width: 75vw;
   display: flex;
   display: -webkit-flex;
   overflow-x: auto;
+  padding-left: 0 !important;
+  .col {
+    padding: 0;
+    height: 100%;
+    width: auto;
+  }
 }
 
 .list-panel {
   width: 17vw;
-  height: 80vh;
+  height: calc(100% - 20px);
   flex: 0, 0, 0;
+  margin-right: 20px;
+  display: table;
+  margin-bottom: 0px !important;
+  .panel-body{
+    height: calc(100% - 40px);
+    padding-bottom: 0 !important;
+    width: 100%;
+  }
+  a {
+    color: black;
+  }
+  a:hover {
+    color: blue;
+  }
 }
 
 .list {
-  height: 62vh;
+  min-height: 150px;
+  height: calc(80.6vh - 163px);
+}
+
+#new_list_form {
+  margin-left: 12px;
+}
+
+.dropdown-menu.list_actions_menu {
+  min-width: 10px;
+}
+
+.list_footer {
+  position: absolute;
+  bottom: 0px;
+  margin-bottom: 20px;
+  right: 35px;
+  left: 15px;
 }
