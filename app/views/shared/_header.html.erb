@@ -23,11 +23,8 @@
             <% end %>
           </li>
         <% else %>
-          <li id="notification">
-            <a class="glyphicon glyphicon-bell" href="#"></a>
-          </li>
           <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            <a href="/invitations" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" data-method="patch" data-remote="true" >
               <%= current_user.email %> <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
@@ -37,7 +34,7 @@
                   <span> Profile</span>
                 <% end %>
               </li>
-              <li>
+              <li class='notification'>
                 <a href="<%= invitations_path %>">
                   <span class="badge"><%= @invitation_count %></span>
                   <span> Invites</span>

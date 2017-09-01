@@ -1,6 +1,6 @@
-= render 'shared/delete_confirmation', object_type: 'note', path: board_list_note_path(@board, list, note), modal_id: note.object_id
-= render 'notes/edit_note', note: note, modal_id: "#{note.object_id}", list: list
-= render 'notes/move_note', note: note, modal_id: "#{note.object_id}", list: list
+= render 'shared/delete_confirmation', object_type: 'note', path: board_list_note_path(@board, list, note), modal_id: note.id
+= render 'notes/edit_note', note: note, list: list
+= render 'notes/move_note', note: note, modal_id: "#{note.id}", list: list
 .panel.panel-default.note_panel{id: "note_#{note.id}"}
   - if !list.is_disabled
     .col-sm-12
@@ -9,14 +9,17 @@
           .glyphicon.glyphicon-menu-hamburger.note_icon
         %ul{class: 'dropdown-menu', role: 'menu', id: "note_menu"}
           %li
-            = link_to "#delete_#{note.object_id}", 'data-toggle': 'modal',title: "delete note" do
-              .fa.fa-times
+            - if can? :destroy, note
+              = link_to "#delete_#{note.id}", 'data-toggle': 'modal',title: "delete note" do
+                .fa.fa-times
           %li
-            = link_to "#edit_#{note.object_id}", 'data-toggle': 'modal', title: "edit note" do
-              .fa.fa-pencil
+            - if can? :update, note
+              = link_to "#edit_notes_#{note.id}", 'data-toggle': 'modal', title: "edit note" do
+                .fa.fa-pencil
           %li
-            = link_to "#move_#{note.object_id}", 'data-toggle': 'modal', title: "move note" do
-              .fa.fa-location-arrow
+            - if can? :move, note
+              = link_to "#move_note_#{note.id}", 'data-toggle': 'modal', title: "move note" do
+                .fa.fa-location-arrow
   .panel-body.scrollable.note
     %pre
       %span.content_for_update= note.text

@@ -1,16 +1,24 @@
 # frozen_string_literal: true
 
 class DashboardsController < ApplicationController
-  before_action :authenticate_user!, only: %i(index show)
+  before_action :set_glob, only: :show
+  authorize_resource class: false
+  skip_authorize_resource only: [:index, :create]
+  #before_action :authenticate_user!, only: %i(index show)
   before_action :find_board, only: :show
+  after_action :create_invited_user_permissions, only: :create
 
   respond_to :js, :html
   helper DashboardsHelper
 
   def index
-    @board = Board.new
-    @boards = current_user.boards
-    @invitation_count = Invitation.where(user_to_invite_id: current_user.id).count
+    if current_user
+      @board = Board.new
+      @boards = current_user.boards
+      @invitation_count = Invitation.where(user_to_invite_id: current_user.id).count
+    else
+      redirect_to user_session_path
+    end
   end
 
   def show
@@ -59,6 +67,11 @@ class DashboardsController < ApplicationController
 
   private
 
+
+  def set_glob
+    $board_id = Board.find(params[:id])
+  end
+
   def user_board_params
     board_id = params[:board_id]
     Invitation.where(board_id: board_id, user_to_invite_id: current_user.id).first.destroy
@@ -76,5 +89,9 @@ class DashboardsController < ApplicationController
     return if @board = current_user.boards.find_by(id: params[:id])
     flash[:warning] = 'You are not accepted in this board'
     redirect_to root_path
+  end
+
+  def create_invited_user_permissions
+    InvitedUserPermission.create(user_id: current_user.id, board_id: params[:board_id])
   end
 end

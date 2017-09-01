@@ -19,6 +19,10 @@ module DashboardsHelper
     @board.creator_id == user.id
   end
 
+  def user_permission(board, user)
+    board.invited_user_permissions.find_by(user_id: user.id)
+  end
+
   def make_nickname message
     profile = message.user.profile
     "#{profile.last_name} #{profile.first_name[0]}.".titleize

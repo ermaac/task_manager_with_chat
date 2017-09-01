@@ -24,4 +24,5 @@
         = render partial: 'notes/note', collection: list.notes.order('created_at asc'), locals: {list: list}
       - unless list.is_disabled
         .list_footer
+        - if can? :create, @note
           = render 'notes/note_form', list: list

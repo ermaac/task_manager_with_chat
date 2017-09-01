@@ -6,7 +6,19 @@
         <h4 class="modal-title">User information</h4>
       </div>
       <div class="modal-body">
-        <p> Some information about user</p>
+      <% if board_creator? current_user %>
+        <%= form_for user_permission(@board, user) do |f| %>
+          <%= hidden_field_tag :board_id, @board.id %>
+          <%= hidden_field_tag :user_id, user.id %>
+          <% InvitedUserPermission::PERMITTABLE_FIELDS.each do |field_name| %>
+            <p>
+              <%= f.check_box field_name %>
+              <%= field_name %>
+            </p>
+          <% end %>
+          <%= f.submit %>
+        <% end %>
+      <% end %>
       </div>
       <div class="modal-footer">
         <%= link_for_creator(user) %>

@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 class InvitationsController < ApplicationController
-  before_action :authenticate_user!
+  authorize_resource
+  skip_authorize_resource only: [:index, :create, :destroy, :notificate]
   before_action :user_email_presence, only: :create
 
   def index
@@ -22,6 +23,11 @@ class InvitationsController < ApplicationController
     invite_id = params[:id]
     @invite = Invitation.find(invite_id).destroy
     redirect_to invitations_path
+  end
+
+  def notificate
+    @invitation_count = Invitation.where(user_to_invite_id: current_user.id).count
+    render 'shared/notificate'
   end
 
   private

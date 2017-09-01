@@ -2,8 +2,9 @@
 
 class NotesController < ApplicationController
   before_action :set_current_note
-  skip_before_action :set_current_note, only: :create
+  skip_before_action :set_current_note, only: [:create, :update_drop]
   before_action :list_enabled?
+  load_and_authorize_resource
 
   def create
     note = Note.new note_params
@@ -27,6 +28,14 @@ class NotesController < ApplicationController
     else
       flash[:alert] = 'Error destroying note'
     end
+  end
+
+  def update_drop
+    note = Note.find(params[:note_id])
+    @lists = List.where(board_id: params[:board_id])
+    list = List.find(params[:list_id])
+    @board = list.board
+    render template: "notes/update_drop", locals: {note: note, list: list }
   end
 
   def update

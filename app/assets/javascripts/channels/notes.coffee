@@ -8,6 +8,9 @@ App.notes = App.cable.subscriptions.create channel: "NotesChannel", room: getBoa
   received: (data) ->
     list_id = '#list_' + data.list_id
     note_id = '#note_' + data.note_id
+    edit_modal_id = '#edit_notes_' + data.note_id
+    delete_modal_id = '#delete_' + data.note_id
+    move_modal_id = '#move_note_' + data.note_id
     unless data.action.blank?
       switch data.action
         when 'create'
@@ -15,8 +18,14 @@ App.notes = App.cable.subscriptions.create channel: "NotesChannel", room: getBoa
           $('textarea').val('')
         when "move"
           $("#{list_id} .list").append data.note
-          list_id = '#list_' + data.current_note_list_id
-          note_id = '#note_' + data.note_id
+          current_list_id = '#list_' + data.current_note_list_id
+          $("#{current_list_id} #{note_id}").remove()
+          $("#{current_list_id} #{edit_modal_id}").remove()
+          $("#{current_list_id} #{move_modal_id}").remove()
+          $("#{current_list_id} #{delete_modal_id}").remove()
+        when 'destroy'
           $("#{list_id} #{note_id}").remove()
-        when 'destroy' then $("#{list_id} #{note_id}").remove()
+          $("#{list_id} #{edit_modal_id}").remove()
+          $("#{list_id} #{move_modal_id}").remove()
+          $("#{list_id} #{delete_modal_id}").remove()
         when 'update' then $("#{note_id} span").text(data.note_text)
