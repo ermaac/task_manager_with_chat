@@ -2,12 +2,9 @@ RailsAdmin.config do |config|
 
   ### Popular gems integration
 
-  # == Devise ==
-  config.authenticate_with do
-    warden.authenticate! scope: :user
+  config.authorize_with do
+    redirect_to main_app.root_path unless warden.user.admin == true
   end
-  config.current_user_method(&:current_user)
-
   ## == Cancan ==
   # config.authorize_with :cancan
 
@@ -22,12 +19,15 @@ RailsAdmin.config do |config|
   ## == Gravatar integration ==
   ## To disable Gravatar integration in Navigation Bar set to false
   # config.show_gravatar = true
-  config.excluded_models = ["UserBoard","Message","Chat","Invitation", "Profile"]
+  config.excluded_models = ["UserBoard","Message","Chat","Invitation"]
   config.model 'User' do
-    exclude_fields :vk_id , :gh_id, :facebook_id, :google_id, :remember_created_at, :reset_password_sent_at, :provider, :last_sign_in_ip, :boards, :current_sign_in_ip, :current_sign_in_at, :updated_at, :created_at
+    exclude_fields :sign_in_count,:last_sign_in_at, :vk_id , :gh_id, :facebook_id, :google_id, :remember_created_at, :reset_password_sent_at, :provider, :last_sign_in_ip, :boards, :current_sign_in_ip, :current_sign_in_at, :updated_at, :created_at
   end  
   config.model 'Invitation' do
     exclude_fields :accepted
+  end  
+  config.model 'Board' do
+    exclude_fields :users, :lists, :creator_id
   end  
   config.actions do
     dashboard                     # mandatory
@@ -43,10 +43,10 @@ RailsAdmin.config do |config|
       except ['Note', 'List', 'Chat','Profile','UserBoard']
     end  
     delete do
-      except ['Note', 'List', 'Chat','Profile','UserBoard']
+      except ['Note', 'List', 'Chat','Profile','UserBoard', 'Board']
     end  
     show_in_app do
-      except ['Invitation', 'Board']
+      except ['Invitation', 'Board', 'Profile']
     end  
 
     ## With an audit adapter, you can add:
