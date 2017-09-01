@@ -94,11 +94,10 @@ App.invited_user_permissions = App.cable.subscriptions.create channel: "InvitedU
     if data.permissions['edit_note'] == '1'
       $.each $('.note_panel'), (i, val) ->
         id = $(val).attr('id')
-        $.each $("##{id} #note_menu"), (j, value) ->
-          note_id = $("##{id} .note").attr('id')
-          if $("##{id} #note_menu .fa-pencil").val() == undefined
-            $("#destroy_note_board_id_#{getBoardId()}_user_id_#{data.user_id}").after("<li id='edit_note_board_id_#{getBoardId()}_user_id_#{data.user_id}'><a data-toggle='modal' title='edit note' href='#edit_#{note_id}'><div class='fa fa-pencil'></div></a></li>")
-            return
+        note_id = $("##{id} .note").attr('id')
+        if $("##{id} #note_menu .fa-pencil").val() == undefined
+          $("##{id} #note_menu #destroy_note_board_id_#{getBoardId()}_user_id_#{data.user_id}").after("<li id='edit_note_board_id_#{getBoardId()}_user_id_#{data.user_id}'><a data-toggle='modal' title='edit note' href='#edit_#{note_id}'><div class='fa fa-pencil'></div></a></li>")
+          return
 
     ######### Move Note To Other List #########
 
@@ -109,11 +108,10 @@ App.invited_user_permissions = App.cable.subscriptions.create channel: "InvitedU
     if data.permissions['move_note_to_other_list'] == '1'
       $.each $('.note_panel'), (i, val) ->
         id = $(val).attr('id')
-        $.each $("##{id} #note_menu"), (j, value) ->
-          note_id = $("##{id} .note").attr('id')
-          if $("##{id} #note_menu .fa-location-arrow").val() == undefined
-            $("#edit_note_board_id_#{getBoardId()}_user_id_#{data.user_id}").after("<li id='edit_note_board_id_#{getBoardId()}_user_id_#{data.user_id}'><a data-toggle='modal' title='move note' href='#move_#{note_id}'><div class='fa fa-location-arrow'></div></a></li>")
-            return
+        note_id = $("##{id} .note").attr('id')
+        if $("##{id} #note_menu .fa-location-arrow").val() == undefined
+          $("##{id} #note_menu #edit_note_board_id_#{getBoardId()}_user_id_#{data.user_id}").after("<li id='edit_note_board_id_#{getBoardId()}_user_id_#{data.user_id}'><a data-toggle='modal' title='move note' href='#move_#{note_id}'><div class='fa fa-location-arrow'></div></a></li>")
+          return
 
     ######### Create List #########
 
