@@ -36,7 +36,7 @@
   </head>
 
   <body>
-  <% if !user_signed_in? %>
+  <% unless user_signed_in? %>
   <%= render "shared/header" %>
   <%end %>
     <div class="container">
@@ -50,7 +50,7 @@
       <div class="row marketing">
         <div class="col-lg-4">
           <h4><a class="btn btn-sm btn-success" href="http://rubizza.com" role="button">Rubizza Camp<a></h4>
-          <p>Courses in which the project was made.</p>
+          <p>Courses on which the project was made.</p>
         </div>
           
         <div class="col-lg-4">
