@@ -2,7 +2,7 @@
   <% if board_subscriber?(user)%>
     <%= link_to "#{user.profile.first_name} #{user.profile.last_name}", "#user#{user.id}",{class:"btn btn-success",'data-toggle': "modal"}%>
   <% elsif board_creator?(user)  %>
-    <%= link_to "#{user.profile.first_name} #{user.profile.last_name}", "#user#{user.id}",{class:"btn btn-danger",'data-toggle': "modal"}%>
+    <%= link_to "#{user.profile.first_name} #{user.profile.last_name}", "#",class:"btn btn-danger"%>
   <% else %>
     <%= link_to "#{user.profile.first_name} #{user.profile.last_name}", "#user#{user.id}",{class:"btn btn-info",'data-toggle': "modal"}%>
   <% end %>

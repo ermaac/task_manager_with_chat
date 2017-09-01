@@ -12,7 +12,7 @@
           .text-center
             .btn-group
               = link_to 'Choose list', update_drop_path(@board, list, note), method: :patch, class: 'btn dropdown-toggle', 'data-toggle': 'dropdown', remote: 'true'
-              %ul.dropdown-menu.dropdown_note
+              %ul.dropdown-menu.dropdown_note.dropdown_move
                 - @lists.each do |list|
                   %li
                     - if(list.id != note.list_id)

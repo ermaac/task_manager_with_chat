@@ -30,6 +30,14 @@ class NotesController < ApplicationController
     end
   end
 
+  def update_drop
+    note = Note.find(params[:note_id])
+    @lists = List.where(board_id: params[:board_id])
+    list = List.find(params[:list_id])
+    @board = list.board
+    render template: "notes/update_drop", locals: {note: note, list: list }
+  end
+
   def update
     if @note.update note_params
       ActionCable.server.broadcast "notes_channel_#{params[:board_id]}",
@@ -53,7 +61,6 @@ class NotesController < ApplicationController
                                  list_id: params[:list_id],
                                  action: params[:action]
   end
-
 
   private
 
